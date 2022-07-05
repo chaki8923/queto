@@ -1,24 +1,28 @@
 
-<h1>新規登録</h1>
-<% if @user.errors.any? %>
-  <div class="alert alert-danger">
-    <ul class="mb-0">
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="p-5 mt-5">
+  <h1>新規登録</h1>
+    <%= form_for(@user,model: @user,url: signup_path,html: {class: 'form-group'}) do |f| %>
+      <div class="mb-3">
+        <%= f.label :email,class: 'form-label' %>
+        <%= f.email_field :email,class: 'form-control' %>
+        <% @user.errors.full_messages_for(:email).each do |message| %>
+          <span class="alert"><%= message %></span>
+        <% end %> 
+      </div>
+      <div class="mb-3">
+        <%= f.label :password,class: 'form-label' %>
+        <%= f.password_field :password,class: 'form-control' %>
+        <% @user.errors.full_messages_for(:password).each do |message| %>
+          <span class="alert"><%= message %></span>
+        <% end %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :password_confirmation,class: 'form-label' %>
+        <%= f.password_field :password_confirmation,class: 'form-control' %>
+         <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
+          <span class="alert"><%= message %></span>
+         <% end %>
+      </div>
+      <%= f.submit "SignUp", class: 'btn btn-primary' %>
       <% end %>
-    </ul>
   </div>
-<% end %>
-<%= form_for(@user,model: @user,url: signup_path,html: {class: 'form-group'}) do |f| %>
-  <div class="mb-3">
-    <%= f.label :email,class: 'form-label' %>
-    <%= f.email_field :email,class: 'form-control' %>
-    <%= render 'layouts/error_msg', object: f.object %>
-  </div>
-   <div class="mb-3">
-    <%= f.label :password,class: 'form-label' %>
-    <%= f.password_field :password,class: 'form-control' %>
-    <%= render 'layouts/error_msg', object: f.object %>
-   </div>
-    <%= f.submit "SignUp", class: 'btn btn-primary' %>
-<% end %>
