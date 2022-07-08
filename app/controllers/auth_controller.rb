@@ -10,7 +10,7 @@ class AuthController < ApplicationController
     if @user.save
       redirect_to action: :home
     else
-      render 'new',status: :unprocessable_entity
+      render 'new',status: :unprocessable_entity#これないとバリデーション出ない
     end
     
 
