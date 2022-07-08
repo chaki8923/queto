@@ -8,16 +8,11 @@ class AuthController < ApplicationController
     puts user_params;
     puts @user
     if @user.save
-      redirect_to action: :home
+      redirect_to('/home')
     else
       render 'new',status: :unprocessable_entity
     end
-    
-
-  end
-
-  def home
-    render('home')
+  
   end
   
 
