@@ -1,18 +1,17 @@
 
 <div class="p-5 mt-5">
+<%= flash[:danger] %>
   <h1>ログイン</h1>
     <%= form_for(:session,url: login_path,html: {class: 'form-group'}) do |f| %>
       <div class="mb-3">
         <%= f.label :email,class: 'form-label' %>
         <%= f.email_field :email,class: 'form-control' %>
-       
       </div>
       <div class="mb-3">
         <%= f.label :password,class: 'form-label' %>
-        <%= f.password_field :password,class: 'form-control' %>
-       
+        <%= f.password_field :password,class: 'form-control',autocomplete: 'off' %>
       </div>
-     
+      
       <%= f.submit "Login", class: 'btn btn-primary' %>
-      <% end %>
+    <% end %>
   </div>
