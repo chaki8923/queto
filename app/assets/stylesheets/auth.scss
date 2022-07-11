@@ -1,3 +1,15 @@
 // Place all the styles related to the auth controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.sample_ul{
+    margin: 240px auto;
+    list-style: none;
+    padding: 0;
+    background: rgba(155, 244, 245, 0.7);
+    padding: 12px;
+    li{
+        font-weight: bold;
+        padding: 12px;
+        text-align: center;
+    }
+}

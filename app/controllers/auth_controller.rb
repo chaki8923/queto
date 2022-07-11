@@ -5,11 +5,19 @@ class AuthController < ApplicationController
     @user = User.new
   end
 
+  def index
+    puts 'インデックス！！'
+    @users = User.email_select('chaki')
+   
+    render("auth/home")
+
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
       login(@user)
-      redirect_to root_path
+      redirect_to('/app/auth/home')
     else
       render 'new',status: :unprocessable_entity#これないとバリデーション出ない
     end
