@@ -8,7 +8,7 @@ class SessionController < ApplicationController
     def create
         if @user.authenticate(session_params[:password])
             login(@user)
-            redirect_to root_path
+            redirect_to words_new_path
         else
             flash.now[:danger] = t('.flash.invalid_password')
             render 'new'

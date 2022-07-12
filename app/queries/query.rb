@@ -4,6 +4,7 @@ class Query
     end
 
     def call
+        puts 'コーーーーーる'
         raise NotImplementedError
     end
 

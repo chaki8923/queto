@@ -6,8 +6,9 @@ class AuthController < ApplicationController
   end
 
   def index
-    puts 'インデックス！！'
-    @users = User.email_select('chaki')
+    search_email = 'cha'
+
+    @users = User.email_select(search_email)
    
     render("auth/home")
 
@@ -17,7 +18,7 @@ class AuthController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(@user)
-      redirect_to('/app/auth/home')
+      redirect_to home_path
     else
       render 'new',status: :unprocessable_entity#これないとバリデーション出ない
     end
