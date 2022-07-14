@@ -6,9 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application'  %>
-
-
+    <%= javascript_pack_tag 'application' %>
+    <%= yield :js %>
+    <%# これでテンプレートごとに読み込みスクリプト分ける %>
    
   </head>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -41,8 +41,10 @@
               Dropdown link
             </span>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <%if(@current_user.present?)%>
               <li><%= link_to "ProfEdit", edit_auth_path(@current_user.id),class: 'dropdown-item' %></li>
               <li><%= link_to "Log out", logout_path, method: :delete,class: 'dropdown-item' %></li>
+              <%end%>
               <li><a class="dropdown-item" href="">Something else here</a></li>
             </ul>
           </li>

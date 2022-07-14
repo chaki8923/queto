@@ -1,4 +1,5 @@
 
+<%= javascript_pack_tag 'image_upload' %> 
 <div class="p-5 mt-5">
   <h1>ユーザー編集</h1>
     <%= form_for(@user,model: @user,url: edit_auth_path,html: {class: 'form-group'}) do |f| %>
@@ -29,6 +30,8 @@
          <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
           <span class="alert"><%= message %></span>
          <% end %>
+      </div>
+       <div id='avatar'>
       </div>
       <%= f.submit "Edit", class: 'btn btn-primary' %>
       <% end %>

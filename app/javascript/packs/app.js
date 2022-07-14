@@ -24,7 +24,7 @@ $(function () {
       $(this).parent().removeClass('active');
     }
   });
-console.log('ターーーボリンクス無効化にしたいいいいい');
+
   $(document).ready('turbolinks:read', function() {
     if(location.pathname != "/") {
         $('.nav li a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');

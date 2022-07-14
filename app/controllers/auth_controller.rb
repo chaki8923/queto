@@ -6,9 +6,9 @@ class AuthController < ApplicationController
   end
 
   def index
-    search_email = 'cha'
+    search_email = 'wa'
 
-    @users = User.email_select(search_email)
+    @users = User.email_select(search_email)#sqlは書かずに検索したいemailアドレスの文字を渡すだけ
    
     render("auth/home")
 
