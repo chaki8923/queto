@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ヤングワード</th>
+      <th scope="col">意味</th>
+      <th scope="col">編集</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @words.map.with_index do |word, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= word.term %></td>
+      <td><%= word.conversion %></td>
+      <td><%= link_to "Edit", edit_word_path(@current_user),class: 'btn btn-success' %><td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

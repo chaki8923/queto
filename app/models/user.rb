@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   has_many :user_rooms, dependent: :destroy
   has_many :rooms, through: :user_rooms
+  has_many :words
 
   has_secure_password validations: true
-  before_create :create_remember_token
+  # before_create :create_remember_token
   
 
   scope :email_select, EmailChakiQuery
@@ -21,5 +22,6 @@ class User < ApplicationRecord
   private
     def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)
+
     end
 end

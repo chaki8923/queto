@@ -6,33 +6,43 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application'  %>
+
+
    
   </head>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="">Navbar</a>
+      <a class="navbar-brand" href=""><img src="/assets/logo.png" alt="" class="logo"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="">Home</a>
+            <a class="nav-link"  href="/home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Features</a>
+            <a class="nav-link"  href="/words/new">Word Create</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Pricing</a>
+            <a class="nav-link"  href="/words/index">Words</a>
           </li>
+          <% if(@current_user.nil?) %>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <% end %>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown link
-            </a>
+            </span>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="">Action</a></li>
-              <li><a class="dropdown-item" href="">Another action</a></li>
+              <li><%= link_to "ProfEdit", edit_auth_path(@current_user.id),class: 'dropdown-item' %></li>
+              <li><%= link_to "Log out", logout_path, method: :delete,class: 'dropdown-item' %></li>
               <li><a class="dropdown-item" href="">Something else here</a></li>
             </ul>
           </li>

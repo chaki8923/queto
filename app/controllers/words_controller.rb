@@ -6,23 +6,37 @@ class WordsController < ApplicationController
   end
 
   def create
-    puts '上ーーーーーーーーーーーーーーーー'
+
     @word = Word.new(word_params)
-    puts '下ーーーーーーーーーーーーーーーー'
     if @word.save
-      render 'new'
+      redirect_to words_new_path, notice: '用語が登録されました'
     else
       render 'new',status: :unprocessable_entity
     end
   end
 
   def index
+    @words = @current_user.words.all
+  end
+
+  def edit
+    @word = Word.find(params[:id])
+  end
+
+  def update
+    @word = Word.find(params[:id])
+    if @word.update(word_params)
+      redirect_to edit_word_path, notice: '編集されました'
+    else
+      render 'edit',status: :unprocessable_entity#これないとバリデーション出ない
+    end
   end
 
   private
   def word_params
-    params.require(:word).permit(:term,:conversion)
+    params.require(:word).permit(:term,:conversion,:user_id)
   end
+  
 
    
 end
