@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get    '/signup',   to: 'auth#new'
   post   '/signup',   to: 'auth#create'
+  patch   '/auth/:id/edit',   to: 'auth#update'
   get    '/home',     to: 'auth#index'
   get    'login',     to: 'session#new'
   delete  'logout',   to: 'session#destroy'

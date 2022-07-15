@@ -1,17 +1,14 @@
 class WordsController < ApplicationController
-
-
   def new
     @word = Word.new
   end
 
   def create
-
     @word = Word.new(word_params)
     if @word.save
       redirect_to words_new_path, notice: '用語が登録されました'
     else
-      render 'new',status: :unprocessable_entity
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -28,15 +25,13 @@ class WordsController < ApplicationController
     if @word.update(word_params)
       redirect_to edit_word_path, notice: '編集されました'
     else
-      render 'edit',status: :unprocessable_entity#これないとバリデーション出ない
+      render 'edit', status: :unprocessable_entity # これないとバリデーション出ない
     end
   end
 
   private
-  def word_params
-    params.require(:word).permit(:term,:conversion,:user_id)
-  end
-  
 
-   
+  def word_params
+    params.require(:word).permit(:term, :conversion, :user_id)
+  end
 end

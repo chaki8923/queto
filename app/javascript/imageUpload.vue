@@ -87,7 +87,7 @@ export default {
   <div class="Image-uploader-wrapper Image-uploader">
       <input
         accept="image/png, image/jpeg, image/bmp"
-        name="image"
+        name="avatar"
         type="file"
         @change="onImageUploaded"
         ref="image"
@@ -98,7 +98,7 @@ export default {
         class="p-croppie__btn btn-success"
         v-if="previewFile"
       >
-        切り抜き
+        切り抜く
       </span>
     </div>
     <img id="js-drawPicture" :src="croppieFile" alt="" v-if="!shouldCropp" />
