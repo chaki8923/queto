@@ -30,6 +30,8 @@ class AuthController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      puts 'イメージ'
+      puts user_params
       redirect_to home_path, notice: '編集されました'
     else
       render 'edit', status: :unprocessable_entity # これないとバリデーション出ない
@@ -39,6 +41,6 @@ class AuthController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_token)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_token,:avatar)
   end
 end

@@ -11,7 +11,8 @@ export default {
       previewFile: false,
       croppieFile: null,
       blob:'',
-      shouldCropp:true
+      shouldCropp:true,
+      imagePath:[]
     };
   },
   methods: {
@@ -30,6 +31,7 @@ export default {
         console.log(this.image);
         this.croppie.destroy();
       }
+      console.log('setUpCroppie');
       let el = document.getElementById("croppie");
       this.croppie = new Croppie(el, {
         viewport: {
@@ -72,6 +74,12 @@ export default {
           console.log(this.blob);
           console.log(this.imageName.name);
           this.croppieFile = response;
+          this.imagePath = {
+            blob:this.blob,
+            fileName:this.imageName.name
+
+          }
+          console.log(this.imagePath);
           this.$emit("imagePath",{
             blob:this.blob,
             fileName:this.imageName.name
@@ -87,11 +95,11 @@ export default {
   <div class="Image-uploader-wrapper Image-uploader">
       <input
         accept="image/png, image/jpeg, image/bmp"
-        name="avatar"
         type="file"
         @change="onImageUploaded"
         ref="image"
       />
+    <input type="hidden" v-model="imagePath" name="user[avatar]">
     <div id="croppie" v-show="shouldCropp">
       <span
         @click="cropFile"
