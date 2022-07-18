@@ -13,19 +13,42 @@
  *= require_tree .
  *= require_self
  */
+@import "mixin";
 
-.field_with_errors{
+.field_with_errors {
     color: rgb(222, 94, 94);
 }
 
-.alert{
+.alert {
     color: rgb(222, 94, 94);
 }
 
-.current{
+.current {
     color: #333;
 }
 
-.logo{
+.logo {
     width: 110px;
+}
+
+.nav-icon {
+    display: none !important;
+    @include mq(md) {
+        display: block !important;
+    }
+    &__pc {
+        width: 55px;
+        float: right;
+        @include mq(md) {
+            display: none;
+        }
+    }
+    &__sp {
+        display: none;
+        @include mq(md) {
+            width: 50px;
+            float: none;
+            display: inline-block;
+        }
+    }
 }

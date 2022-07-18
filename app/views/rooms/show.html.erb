@@ -1,2 +1,15 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<h1><%= @room.name %></h1>
+<div id="container">
+  <% if @message.present? %>
+  <p>
+    > <%= @message.content %>
+  </p>
+  <%end%>
+  <%= form_with(model: @message,  html:{class: 'form-group'}) do |f| %>
+     <%= f.text_field :content,class: 'form-control' %>
+     <%= f.hidden_field :user_id, value: @current_user.id %>
+     <%= f.hidden_field :room_id, value: @room.id %>
+     <%= f.submit '送信' %>
+ <% end %>
+</div>
+<%= link_to 'Back', user_rooms_path(@current_user.id) %>

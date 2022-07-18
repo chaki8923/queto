@@ -1,10 +1,9 @@
 import Vue from 'vue/dist/vue.esm'
-import ImageUpload from '../imageUpload.vue'
-
+import AvatarForm from '../avatarForm.vue'
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#avatar',
-    render: h => h(ImageUpload)
+    render: h => h(AvatarForm, { props: $('#avatar').data() })
    }).$mount()
 
 })

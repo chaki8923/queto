@@ -7,7 +7,6 @@ class AuthController < ApplicationController
 
   def index
     search_email = 'wa'
-
     @users = User.email_select(search_email) # sqlは書かずに検索したいemailアドレスの文字を渡すだけ
 
     render('auth/home')
@@ -30,17 +29,31 @@ class AuthController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      puts 'イメージ'
-      puts user_params
       redirect_to home_path, notice: '編集されました'
     else
       render 'edit', status: :unprocessable_entity # これないとバリデーション出ない
     end
   end
 
+  def get_user
+    @user = @current_user
+    render json: {id: @user.id},status: 200
+  end
+
+  def update_avatar
+    @user = User.find(params[:id])
+    puts 'パラメータ'
+    puts user_params
+    if @user.update(user_params)
+      render json: {id: @user.id,avatar: @user.avatar},status: 200
+    else
+      render json: {message:'失敗しました',error: @user.errors.messages},status: 400
+    end
+   
+  end
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_token,:avatar)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_token,:avatar)
   end
 end

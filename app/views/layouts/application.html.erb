@@ -9,7 +9,6 @@
     <%= javascript_pack_tag 'application' %>
     <%= yield :js %>
     <%# これでテンプレートごとに読み込みスクリプト分ける %>
-   
   </head>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -28,13 +27,13 @@
           <li class="nav-item">
             <a class="nav-link"  href="/words/index">Words</a>
           </li>
-          <% if(@current_user.nil?) %>
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Signup</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
+          <% if(@current_user.blank?) %>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
           <% end %>
           <li class="nav-item dropdown">
             <span class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,17 +41,37 @@
             </span>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <%if(@current_user.present?)%>
-              <li><%= link_to "ProfEdit", edit_auth_path(@current_user.id),class: 'dropdown-item' %></li>
-              <li><%= link_to "Log out", logout_path, method: :delete,class: 'dropdown-item' %></li>
+                <li><%= link_to "ProfEdit", edit_auth_path(@current_user.id),class: 'dropdown-item' %></li>
+                <li><%= link_to "Log out", logout_path, method: :delete,class: 'dropdown-item' %></li>
+                <li><%= link_to "Myroom" , user_rooms_path(@current_user.id),class: 'dropdown-item'%></li>
               <%end%>
-              <li><a class="dropdown-item" href="">Something else here</a></li>
+              <%if(@current_user.avatar.present?)%>
+                <a class="dropdown-item nav-icon" href="/auth/<%=@current_user.id%>/avatar">
+                  <%= image_tag @current_user.avatar.url,class: 'nav-icon__sp'%>
+                </a>
+              <%end%>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
           </li>
         </ul>
       </div>
     </div>
+    <%if(@current_user.present?)%>
+      <a class="nav-item" href="/auth/<%=@current_user.id%>/avatar">
+        <%if(@current_user.avatar.blank?)%>
+          <img src="/assets/default_icon.png" alt="" class="logo">
+        <%else%>
+          <%= image_tag @current_user.avatar.url,class: 'nav-icon__pc' %>
+        <%end%>
+      </a>
+    <%end%>
   </nav>
   <body class="container">
+    <div class="js-delete-message c-flash">
+      <span class="js-delete-text c-flash_text"></span>
+    </div>
     <%= yield %>
   </body>
 </html>

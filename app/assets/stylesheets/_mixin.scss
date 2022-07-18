@@ -1,0 +1,13 @@
+$breakpoints:(
+  'sp': 'screen and (max-width: 590px)',
+  'md': 'screen and (min-width:591px) and (max-width: 990px)',
+  'ls': 'screen and (max-width: 1024px)',
+  'xl' : 'screen and (max-width: 1400px)',
+)!default;
+//@mixinは関数みたいなものを作れる
+
+@mixin mq($breakpoint: sp){
+  @media #{map-get($breakpoints,$breakpoint)}{
+    @content;
+  }
+}

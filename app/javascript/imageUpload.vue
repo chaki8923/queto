@@ -1,7 +1,10 @@
 <script>
 import Croppie from "croppie";
+import axios from 'axios';
+//CSRFトークン生成
+const token = document.getElementsByName("csrf-token")[0].getAttribute("content");
+axios.defaults.headers.common["X-CSRF-Token"] = token;
 export default {
-  emits: ["imagePath"],
   data() {
     return {
       image: null,
@@ -12,7 +15,8 @@ export default {
       croppieFile: null,
       blob:'',
       shouldCropp:true,
-      imagePath:[]
+      imagePath:'',
+      error:''
     };
   },
   methods: {
@@ -23,15 +27,15 @@ export default {
       this.image = URL.createObjectURL(file);
       //railsに渡す用。切り抜きしなければそのまま登録
       this.imageName = file;
+      // 親コンポーネントの登録ボタン非表示
+      this.$emit('hide_btn');
       this.setUpCroppie();
     },
     setUpCroppie() {
+      //既に切り抜き画像があれば削除
       if (this.previewFile) {
-        console.log("イメージ");
-        console.log(this.image);
         this.croppie.destroy();
       }
-      console.log('setUpCroppie');
       let el = document.getElementById("croppie");
       this.croppie = new Croppie(el, {
         viewport: {
@@ -50,8 +54,7 @@ export default {
         url: this.image,
       });
       this.previewFile = true;
-      console.log("emitファイル");
-      console.log(this.imageName);
+
       this.$emit("imagePath", this.imageName);
     },
     cropFile() {
@@ -60,9 +63,9 @@ export default {
         .result({
           type: "canvas",
           size: "viewport",
-        
         })
         .then((response) => {
+          //======Base64からblobへ変換============
           let bin = atob(response.replace(/^.*,/, ""));
           let buffer = new Uint8Array(bin.length);
           for (let i = 0; i < bin.length; i++) {
@@ -71,26 +74,21 @@ export default {
           this.blob = new Blob([buffer.buffer], {
             type: "image/gif",
           });
-          console.log(this.blob);
-          console.log(this.imageName.name);
+        //=======================================
           this.croppieFile = response;
-          this.imagePath = {
-            blob:this.blob,
-            fileName:this.imageName.name
-
-          }
-          console.log(this.imagePath);
+          this.imagePath = this.blob,
           this.$emit("imagePath",{
             blob:this.blob,
-            fileName:this.imageName.name
+            fileName:this.imageName.name,
           });
+          this.$emit('show_btn');
         });
     },
+   
   },
   mounted() {},
 };
 </script>
-
 <template>
   <div class="Image-uploader-wrapper Image-uploader">
       <input
@@ -99,7 +97,6 @@ export default {
         @change="onImageUploaded"
         ref="image"
       />
-    <input type="hidden" v-model="imagePath" name="user[avatar]">
     <div id="croppie" v-show="shouldCropp">
       <span
         @click="cropFile"
@@ -110,5 +107,6 @@ export default {
       </span>
     </div>
     <img id="js-drawPicture" :src="croppieFile" alt="" v-if="!shouldCropp" />
+    {{error}}
   </div>
 </template>
