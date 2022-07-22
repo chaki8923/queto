@@ -52,3 +52,17 @@
         }
     }
 }
+
+.default-icon{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+
+}
+
+.icon-wrapper{
+    width: 60px;
+    background: #fff;
+    border-radius: 50%;
+}

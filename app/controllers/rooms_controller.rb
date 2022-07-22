@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
     @messages = @room.messages.all
     @message = @room.messages.build
     puts 'message------'
-    puts @message
+    puts params
   end
 
   def create

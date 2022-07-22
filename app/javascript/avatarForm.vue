@@ -27,9 +27,11 @@ export default {
   },
   methods: {
     show_flg(){
+      console.log('show!');
       this.show_btn = true;
     },
     hide_btn(){
+      console.log('hide');
       this.show_btn = false;
     },
     updateAvatar() {
@@ -57,7 +59,6 @@ export default {
           console.log("登録成功");
           console.log(res);
 
-         
           // window.sessionStorage.setItem([プロパティ名],[値])でセッションに保存できる。
           window.sessionStorage.setItem(
             ["flash_message"],
@@ -87,13 +88,7 @@ export default {
   mounted() {
     this.getUser();
     console.log(this.userId);
-
-    
-
   },
-   created() {
-    
-  }
 };
 </script>
 

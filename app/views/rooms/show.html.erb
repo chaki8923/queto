@@ -1,11 +1,12 @@
+ <%= javascript_pack_tag 'chat_window' %> 
 <h1><%= @room.name %></h1>
 <div id="container">
   <% if @message.present? %>
-  <p>
-    > <%= @message.content %>
-  </p>
+     <% @messages.map.with_index do |message, index|%>
+      <p><%= message.content %></p>
+     <% end %>
   <%end%>
-  <%= form_with(model: @message,  html:{class: 'form-group'}) do |f| %>
+  <%= form_with(model: @message,url: messages_path, html:{class: 'form-group'}) do |f| %>
      <%= f.text_field :content,class: 'form-control' %>
      <%= f.hidden_field :user_id, value: @current_user.id %>
      <%= f.hidden_field :room_id, value: @room.id %>
@@ -13,3 +14,5 @@
  <% end %>
 </div>
 <%= link_to 'Back', user_rooms_path(@current_user.id) %>
+<div id="chat">
+</div>

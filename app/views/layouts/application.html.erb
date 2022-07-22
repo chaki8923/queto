@@ -21,12 +21,14 @@
           <li class="nav-item">
             <a class="nav-link"  href="/home">Home</a>
           </li>
+          <%if(@current_user.present?)%>
           <li class="nav-item">
             <a class="nav-link"  href="/words/new">Word Create</a>
           </li>
           <li class="nav-item">
             <a class="nav-link"  href="/words/index">Words</a>
           </li>
+          <%end%>
           <% if(@current_user.blank?) %>
             <li class="nav-item">
               <a class="nav-link" href="/signup">Signup</a>
@@ -35,33 +37,30 @@
               <a class="nav-link" href="/login">Login</a>
             </li>
           <% end %>
+              <%if(@current_user.present?)%>
           <li class="nav-item dropdown">
             <span class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown link
             </span>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <%if(@current_user.present?)%>
                 <li><%= link_to "ProfEdit", edit_auth_path(@current_user.id),class: 'dropdown-item' %></li>
                 <li><%= link_to "Log out", logout_path, method: :delete,class: 'dropdown-item' %></li>
                 <li><%= link_to "Myroom" , user_rooms_path(@current_user.id),class: 'dropdown-item'%></li>
-              <%end%>
-              <%if(@current_user.avatar.present?)%>
+              <%if(@current_user.present? && @current_user.avatar.present?)%>
                 <a class="dropdown-item nav-icon" href="/auth/<%=@current_user.id%>/avatar">
                   <%= image_tag @current_user.avatar.url,class: 'nav-icon__sp'%>
                 </a>
               <%end%>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
+              <%end%>
         </ul>
       </div>
     </div>
     <%if(@current_user.present?)%>
-      <a class="nav-item" href="/auth/<%=@current_user.id%>/avatar">
+      <a class="nav-item icon-wrapper" href="/auth/<%=@current_user.id%>/avatar">
         <%if(@current_user.avatar.blank?)%>
-          <img src="/assets/default_icon.png" alt="" class="logo">
+          <img src="/assets/default_icon.png" alt="" class="default-icon">
         <%else%>
           <%= image_tag @current_user.avatar.url,class: 'nav-icon__pc' %>
         <%end%>

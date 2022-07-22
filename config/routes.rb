@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'messages/craete'
   get 'message/create'
   get 'words/new'
   get 'words/index'
@@ -11,7 +12,9 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :rooms, only: [:new,:index, :show,:create]
   end
-  resources :messages, only: [:create]
+
+
+  resources :messages
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #vue側でuser_id取得用

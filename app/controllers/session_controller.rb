@@ -22,15 +22,14 @@ class SessionController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find_by!(email: session_params[:email])
-  rescue StandardError
-    puts session_params[:email]
-    flash.now[:danger] = t('.flash.invalid_mail')
-    render action: 'new'
-  end
+    def set_user
+      @user = User.find_by!(email: session_params[:email])
+    rescue StandardError
+      flash.now[:danger] = t('.flash.invalid_mail')
+      render action: 'new'
+    end
 
-  def session_params
-    params.require(:session).permit(:email, :password)
-  end
+    def session_params
+      params.require(:session).permit(:email, :password)
+    end
 end

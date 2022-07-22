@@ -84,7 +84,6 @@ export default {
           this.$emit('show_btn');
         });
     },
-   
   },
   mounted() {},
 };
