@@ -7,8 +7,8 @@ console.log(router);
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    router,
     el: '#chat',
+    router:router,
     render: h => h(ChatWindow)
    }).$mount()
 

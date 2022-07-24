@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-
+import router from './packs/router' 
 //CSRFトークン生成
 const token = document.getElementsByName("csrf-token")[0].getAttribute("content");
 axios.defaults.headers.common["X-CSRF-Token"] = token;
@@ -8,7 +8,6 @@ export default {
     data() {
         return {
             messages:[],
-            id:this.$route.params.id
         };
     },
     methods: {
@@ -21,8 +20,7 @@ export default {
         },
     },
     mounted() {
-        console.log(this.id);
-        
+        console.log(router.params);
      },
 };
 </script>
