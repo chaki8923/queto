@@ -1,14 +1,12 @@
-import Vue from 'vue/dist/vue.esm'
-import ChatWindow from  '../chatWindow.vue'
-import router from './router' 
-console.log('ルーター');
-console.log(router);
+import Vue from 'vue/dist/vue.esm';
+import router from './router';
+import ChatWindow from  '../chatWindow.vue';
 
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    router,
     el: '#chat',
+    router,
     render: h => h(ChatWindow)
    }).$mount()
 

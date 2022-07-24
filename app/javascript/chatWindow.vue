@@ -8,7 +8,8 @@ export default {
     data() {
         return {
             messages:[],
-            id:this.$route.params.id
+            $route: {params: { id: ""}},
+            // id:this.$route.params.id
         };
     },
     methods: {
@@ -17,20 +18,16 @@ export default {
             axios.get(link).then((res)=>{
                 console.log(res);
                 this.messages = res.data.content;
-            })
+            });
         },
     },
     mounted() {
-        console.log(this.id);
-        
+        console.log(this.$route);
      },
 };
 </script>
 <template>
     <div>
-        
-        <ul v-for="message in messages" key="message.id">
-            <li>{{message.content}}</li>
-        </ul>
+       <router-link to="/users/15/rooms/3" name="ChatWindow">Home</router-link>
     </div>
 </template>
