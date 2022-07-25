@@ -1,6 +1,21 @@
 import Vue from 'vue/dist/vue.esm';
-import router from './router';
+import Router from 'vue-router'
+Vue.use(Router)
 import ChatWindow from  '../chatWindow.vue';
+
+
+const router = new Router({
+    mode: 'history',
+    routes: [
+        {
+          path: '/users/:user_id/rooms/:id',
+          name: 'ChatWindow',
+          
+          // 同期でコンポーネントを呼び出す
+          component: ChatWindow
+        },
+      ]   
+})
 
 
 document.addEventListener('DOMContentLoaded', () => {

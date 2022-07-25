@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #vue側でuser_id取得用
   get 'get_user', to: 'auth#get_user'
+  get 'get_message/:user_id/:id', to: 'rooms#get_messages'
+
   get    '/signup',   to: 'auth#new'
   post   '/signup',   to: 'auth#create'
   get    '/auth/:id/avatar',     to: 'auth#avatar'

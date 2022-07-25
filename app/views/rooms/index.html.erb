@@ -2,6 +2,10 @@
 <%=link_to "チャット部屋登録",new_user_room_path(@current_user) %>
 <ul>
     <% @rooms.each do |room| %>
+        <% if room.user_ids.include?(@current_user.id) %>
         <li><%= link_to room.name, user_room_path(@current_user,room) %></li>
+        <% else %>
+        <%= room.name %><span class="ml-3 btn btn-success">参加リクエスト</span>
+        <% end %>
     <% end %>
 </ul>

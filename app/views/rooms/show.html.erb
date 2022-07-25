@@ -1,11 +1,6 @@
  <%= javascript_pack_tag 'chat_window' %> 
 <h1><%= @room.name %></h1>
 <div id="container">
-  <% if @message.present? %>
-     <% @messages.map.with_index do |message, index|%>
-      <p><%= message.content %></p>
-     <% end %>
-  <%end%>
   <%= form_with(model: @message,url: messages_path, html:{class: 'form-group'}) do |f| %>
      <%= f.text_field :content,class: 'form-control' %>
      <%= f.hidden_field :user_id, value: @current_user.id %>

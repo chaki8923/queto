@@ -9,25 +9,32 @@ export default {
         return {
             messages:[],
             $route: {params: { id: ""}},
-            // id:this.$route.params.id
+            user_id:this.$route.params.user_id,
+            room_id:this.$route.params.id
         };
     },
     methods: {
         getMessages() {
-            const link = location.protocol + "//" + location.hostname + ":3000" + "/get_params";
+            const link = location.protocol + "//" + location.hostname + ":3000" + "/get_message/" + this.user_id + '/' + this.room_id;
             axios.get(link).then((res)=>{
                 console.log(res);
-                this.messages = res.data.content;
+                this.messages = res.data;
+                console.log(this.messages);
             });
         },
     },
     mounted() {
-        console.log(this.$route);
+        console.log(this.$route.params);
+        this.getMessages();
+
      },
 };
 </script>
 <template>
-    <div>
-       <router-link to="/users/15/rooms/3" name="ChatWindow">Home</router-link>
-    </div>
+<div>
+    <ul v-for="message in messages">
+        <li>{{message.content}}</li>
+    </ul>
+</div>
+    
 </template>
