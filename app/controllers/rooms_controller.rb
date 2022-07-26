@@ -5,41 +5,27 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
+    @room_requests = RoomRequest.find_by(user_id: @current_user.id)
+    @request_flg = true
+    if @room_requests.nil?
+      @request_flg = false
+    end
+   
   end
 
   def show
     @room = @current_user.rooms.find(params[:id])
+    # メッセージにリクエストフラグ立てる
     @messages = @room.messages.all
-    @message = @room.messages.build
-
-   
+    # @messages = @messages.room_requests.all
+    @message = @room.messages.build 
+    
   end
-
-  def get_messages
-    @room = @current_user.rooms.find(params[:id])
-    @messages = @room.messages.all
-
-    if @messages.present?
-      messages_array = @messages.map do |message|
-        {
-          id:message.id,
-          user_id:message.user_id,
-          room_id:message.room_id,
-          content:message.content,
-          created_at:message.created_at
-        }
-      end
-      render json:  messages_array,status: 200
-    else
-      render json:{messages:'まだメッセージはありません'},status: 400
-    end
-
-  end
-
+  
   def create
     @room = Room.new(room_params)
     if @room.save
-      user_room = UserRoom.create(user_id:params[:user_id],room_id:@room.id)
+      user_room = UserRoom.create(user_id: params[:user_id],room_id: @room.id)
       redirect_to home_path, notice: '登録されました'
     else
     end
@@ -47,7 +33,7 @@ class RoomsController < ApplicationController
 
   private
     def room_params
-      params.require(:room).permit(:name)
+      params.require(:room).permit(:name,:admin_user)
     end
 
 end

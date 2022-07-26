@@ -2,10 +2,20 @@
 <%=link_to "チャット部屋登録",new_user_room_path(@current_user) %>
 <ul>
     <% @rooms.each do |room| %>
+        <%# ルームテーブルに自分のidあれば表示 %>
         <% if room.user_ids.include?(@current_user.id) %>
         <li><%= link_to room.name, user_room_path(@current_user,room) %></li>
         <% else %>
-        <%= room.name %><span class="ml-3 btn btn-success">参加リクエスト</span>
+        <%# ルームテーブルに自分のidあれば表示なければリンクは表示しない。 %>
+            <%= form_with(url: '/join_us',local: false, html:{class: 'form-group'})  do |f| %>
+                <% if @request_flg == false %>
+                   <%= room.name %>  <button class="ml-3 btn btn-success">参加リクエスト</button>
+                <%else%>
+                    <%= room.name %> <button class="ml-3 btn btn-secondary" disabled >リクエスト中</button>
+                <%end%>
+            <%= f.hidden_field :room_id, value: room.id %>
+            <%= f.hidden_field :content, value: 'リクエスト' %>
+        <%end%>
         <% end %>
     <% end %>
 </ul>

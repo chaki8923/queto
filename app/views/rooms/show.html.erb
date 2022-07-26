@@ -1,13 +1,14 @@
  <%= javascript_pack_tag 'chat_window' %> 
 <h1><%= @room.name %></h1>
-<div id="container">
-  <%= form_with(model: @message,url: messages_path, html:{class: 'form-group'}) do |f| %>
-     <%= f.text_field :content,class: 'form-control' %>
+<div id="data" data-id="<%= @room.id %>" data-user-id="<%= @current_user.id %>"></div>
+  <%= form_with(model: @message,local: false, html:{class: 'form-group'})  do |f| %>
+     <%= f.text_field :content,class: 'form-control message' %>
      <%= f.hidden_field :user_id, value: @current_user.id %>
      <%= f.hidden_field :room_id, value: @room.id %>
      <%= f.submit '送信' %>
  <% end %>
-</div>
 <%= link_to 'Back', user_rooms_path(@current_user.id) %>
-<div id="chat">
+<div id="container">
+<%= render @messages %>
 </div>
+

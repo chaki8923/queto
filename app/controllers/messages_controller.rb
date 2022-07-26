@@ -1,31 +1,20 @@
 class MessagesController < ApplicationController
 
   def create
+
     @message = Message.create!(message_params)
+    @room = Room.find_by(id: message_params[:room_id])
+    @user = @current_user
+    RoomChannel.broadcast_to(@room, user:@user,message: @message.template)
   end
-
-  def index
-    puts 'パラメーター'
-    puts params
-
   
-    @messages = @room.messages.all
+  def join
+    @message = Message.create!(content: params['content'],room_id: params['room_id'],user_id: @current_user.id)
+    @room = Room.find_by(id: params['room_id'])
+    RoomRequest.find_or_create_by(user_id: @current_user.id,room_id: params['room_id'])
 
-    if @messages.present?
-     messages_array = @messages.map do |message|
-      {
-        id:message.id,
-        user_id:message.user_id,
-        room_id:message.room_id,
-        content:message.content,
-        created_at:message.created_at
-      }
-    end
-    render json: messages_array,status: 200
-  else
-    render json:{messages:'まだメッセージはありません'},status: 400
+    RoomChannel.broadcast_to(@room, user:@user,message: @message.template)
   end
-end
 
   private
     def message_params

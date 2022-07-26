@@ -53,6 +53,8 @@ $(function () {
       window.sessionStorage.removeItem(['flash_message']);
     },3000)
   }
+  $('.message').val('');
 })
+
 
 
