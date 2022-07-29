@@ -27,7 +27,5 @@ export default {
 };
 </script>
 <template>
-    <div>
-       <router-link to="/users/15/rooms/3" name="ChatWindow">Home</router-link>
-    </div>
+       <router-link to="/users/15/rooms/3">Home</router-link>
 </template>
