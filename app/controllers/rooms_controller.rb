@@ -15,10 +15,10 @@ class RoomsController < ApplicationController
 
   def show
     @room = @current_user.rooms.find(params[:id])
-    # メッセージにリクエストフラグ立てる
     @messages = @room.messages.all
     # @messages = @messages.room_requests.all
     @message = @room.messages.build 
+    puts 'showメソッド'
     
   end
   

@@ -4,6 +4,7 @@ class Message < ApplicationRecord
   validates_presence_of :content
 
   def template
-    ApplicationController.renderer.render partial: 'messages/message', locals: { message: self }
+    #messageコントローラーからmessageとuser情報を渡してる。
+    ApplicationController.renderer.render partial: 'messages/message', locals: { message: self,current_user: user}
   end
 end

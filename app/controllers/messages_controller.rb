@@ -12,8 +12,16 @@ class MessagesController < ApplicationController
     @message = Message.create!(content: params['content'],room_id: params['room_id'],user_id: @current_user.id)
     @room = Room.find_by(id: params['room_id'])
     RoomRequest.find_or_create_by(user_id: @current_user.id,room_id: params['room_id'])
-
     RoomChannel.broadcast_to(@room, user:@user,message: @message.template)
+    
+  end
+
+  def permission
+
+    @current_room = Room.find_by(id: params['room_id'])
+    if Room.find_or_create_by(id: @current_room.id,name: @current_room.name)
+      UserRoom.create!(user_id: params['user_id'],room_id: params['room_id'])
+    end
   end
 
   private

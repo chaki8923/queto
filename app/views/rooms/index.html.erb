@@ -1,5 +1,6 @@
 <h1>Chat Rooms</h1>
 <%=link_to "チャット部屋登録",new_user_room_path(@current_user) %>
+
 <ul>
     <% @rooms.each do |room| %>
         <%# ルームテーブルに自分のidあれば表示 %>
@@ -14,7 +15,8 @@
                     <%= room.name %> <button class="ml-3 btn btn-secondary" disabled >リクエスト中</button>
                 <%end%>
             <%= f.hidden_field :room_id, value: room.id %>
-            <%= f.hidden_field :content, value: 'リクエスト' %>
+            <%= f.hidden_field :request_flg, value: 1 %>
+            <%= f.hidden_field :content, value: '承認する' %>
         <%end%>
         <% end %>
     <% end %>

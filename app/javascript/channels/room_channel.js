@@ -29,7 +29,6 @@ window.addEventListener('load',(event) => {
     received(data) {
       // Called when there's incoming data on the websocket for this channel
       console.log('recieveした');
-      console.log(data);
       document.getElementById("message_content").value = ''
       const container = document.getElementById("container")
       container.insertAdjacentHTML('beforeend', data['message'])

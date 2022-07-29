@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:create]
   post '/join_us', to: 'messages#join'
+  post '/permission', to: 'messages#permission'
   resources :words
 
   resources :users, only: [] do

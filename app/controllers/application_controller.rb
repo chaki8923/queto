@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
+  before_action :set_user_id_to_cookie
   before_action :require_sign_in!
   helper_method :signed_in?
 
@@ -13,6 +14,7 @@ class ApplicationController < ActionController::Base
   def login(user)
     remember_token = User.new_remember_token                  # remember_token作成
     cookies.permanent[:user_remember_token] = remember_token  # クッキーに入れて
+    cookies.permanent[:user_id] = user.id
     user.update!(remember_token: User.encrypt(remember_token)) # userテーブルのremember/tokenを更新
   end
 
@@ -28,5 +30,13 @@ class ApplicationController < ActionController::Base
 
   def require_sign_in!
     redirect_to login_path unless signed_in?
+  end
+
+  # ActionCable用
+  # login時にセットするようにはしているが、それだけだとすでにログインしているユーザーに対してクッキーをセットできないので暫定的にこうする
+  def set_user_id_to_cookie
+    if @current_user
+      cookies.permanent[:user_id] = @current_user.id
+    end
   end
 end
