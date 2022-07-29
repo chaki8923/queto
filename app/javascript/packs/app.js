@@ -54,6 +54,16 @@ $(function () {
     },3000)
   }
   $('.message').val('');
+
+  $('.js-reload-btn').on('click',function(){
+    $(this).prop("disabled", true);
+    $(this).closest('form').submit();
+    setTimeout(() => {
+      location.reload()
+      
+    },1000 );
+  })
+
 })
 
 

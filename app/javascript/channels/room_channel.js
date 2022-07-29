@@ -35,7 +35,7 @@ window.addEventListener('load',(event) => {
           document.getElementById("message_content").value = ''
           const container = document.getElementById("container")
           container.insertAdjacentHTML('beforeend', data['message'])
-
+        
           //多分ここでnoticeに通知テンプレート渡す
        
       }

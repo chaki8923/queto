@@ -18,7 +18,7 @@
      <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
         <%= f.hidden_field :user_id, value: message.user.id %>
         <%= f.hidden_field :room_id, value: message.room.id %>
-        <button class="btn btn-danger"><%= message.content %></button>
+        <button class="btn btn-danger js-reload-btn"><%= message.content %></button>
       <% end %>
     <%end%>
   </div>
