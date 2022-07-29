@@ -15,7 +15,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = @current_user.rooms.find(params[:id])
-    @messages = @room.messages.all
+    @messages = @room.messages.all.order(created_at: "ASC")
     # @messages = @messages.room_requests.all
     @message = @room.messages.build 
     puts 'showメソッド'

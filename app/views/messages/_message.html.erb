@@ -13,7 +13,8 @@
   <%# ルームの作成者であればメッセージ表示 %>
     <% if message.request_flg.nil? %>
      <span class="message-content"><%= message.content %></span>
-    <%elsif message.request_flg == 1%>
+     
+    <%else%>
      <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
         <%= f.hidden_field :user_id, value: message.user.id %>
         <%= f.hidden_field :room_id, value: message.room.id %>
