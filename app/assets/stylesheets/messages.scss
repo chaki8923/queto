@@ -1,3 +1,64 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.chat_icon {
+    width: 50px;
+}
+
+.chat-line {
+    display: flex;
+    margin-bottom: 16px;
+
+}
+
+.my {
+    flex-direction: row-reverse;
+
+    .message-content {
+        min-width: 300px;
+        padding: 12px;
+        background-color: rgb(190, 230, 224);
+        border-radius: 99999px;
+        margin-right: 12px;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: -10px;
+            bottom: 5px;
+            border-style: solid;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 50px solid rgb(190, 230, 224);
+            border-right: 0;
+            z-index: -1;
+        }
+    }
+}
+
+.you {
+    
+    .message-content {
+        min-width: 300px;
+        padding: 12px;
+        background-color: rgb(237, 217, 231);
+        border-radius: 99999px;
+        margin-left: 12px;
+        position: relative;
+        &::before {
+                content: '';
+                position: absolute;
+                left: -10px;
+                bottom: 5px;
+                border-style: solid;
+                border-top: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+                border-right: 50px solid rgb(237, 217, 231);
+                border-left: 0;
+                z-index: -1;
+        }
+    }
+}

@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  get 'messages/craete'
-  get 'message/create'
+
   get 'words/new'
   get 'words/index'
   get 'words/:id/edit', to: 'words#edit'
   patch 'words/:id/edit', to: 'words#update'
   post 'words/new', to: 'words#create'
 
+  resources :messages, only: [:create]
+  post '/join_us', to: 'messages#join'
+  post '/permission', to: 'messages#permission'
   resources :words
 
   resources :users, only: [] do
@@ -14,11 +16,12 @@ Rails.application.routes.draw do
   end
 
 
-  resources :messages
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #vue側でuser_id取得用
   get 'get_user', to: 'auth#get_user'
+  get 'get_message/:user_id/:id', to: 'rooms#get_messages'
+
   get    '/signup',   to: 'auth#new'
   post   '/signup',   to: 'auth#create'
   get    '/auth/:id/avatar',     to: 'auth#avatar'
