@@ -1,24 +1,22 @@
 
-  <%  if @current_user.present? %>
-  <div class="chat-line<% if @current_user.id == message.user.id %> my <% else %> you <%  end %>" >
-  <% else %>
-  <div class="chat-line<% if current_user.id == message.user.id %> my <% else %> you <%  end %>" >
-  <%  end %>
-  <%# アバター切り替え %>
-    <%if message.user.avatar.blank?%>
+
+  <%# actioncable時のみ表示させる %>
+  <% if @current_user.nil?  %>
+    <%if message.user.avatar.blank? %>
         <img src="/assets/default_icon.png" alt="" class="chat_icon">
      <%else%>
         <%= image_tag message.user.avatar.url,class: 'chat_icon'%>
     <%end%>
-  <%# ルームの作成者であればメッセージ表示 %>
+  <%# ルームの参加者はメッセージ表示 %>
     <% if message.request_flg.nil? %>
      <span class="message-content"><%= message.content %></span>
-     
     <%else%>
      <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
         <%= f.hidden_field :user_id, value: message.user.id %>
         <%= f.hidden_field :room_id, value: message.room.id %>
+        <%= f.hidden_field :push_user, value: params[:user_id] %>
         <button class="btn btn-danger js-reload-btn"><%= message.content %></button>
       <% end %>
     <%end%>
-  </div>
+  <% end %>
+

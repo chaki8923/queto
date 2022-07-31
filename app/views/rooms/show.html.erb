@@ -7,8 +7,28 @@
      <%= f.hidden_field :room_id, value: @room.id %>
      <%= f.submit '送信' %>
  <% end %>
-<%= link_to 'Back', user_rooms_path(@current_user.id) %>
+
 <div id="container">
-<%= render @messages %>
+<% @messages.map do |message| %>
+  <div class="chat-line <% if message.user_id == @current_user.id %> my <%  else %> you <% end %>" >
+      <%if message.user.avatar.blank? %>
+        <img src="/assets/default_icon.png" alt="" class="chat_icon">
+     <%else%>
+        <%= image_tag message.user.avatar.url,class: 'chat_icon'%>
+    <%end%>
+  <%# ルームの作成者であればメッセージ表示 %>
+    <% if message.request_flg.nil? %>
+     <span class="message-content"><%= message.content %></span>
+    <%else%>
+     <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
+        <%= f.hidden_field :user_id, value: message.user.id %>
+        <%= f.hidden_field :room_id, value: message.room.id %>
+         <%= f.hidden_field :push_user, value: params[:user_id] %>
+        <button class="btn btn-danger js-reload-btn"><%= message.content %></button>
+      <% end %>
+    <%end%>
+  </div>
+    <%= render partial: 'messages/message', locals: {message: message} %>
+<% end %>
 </div>
 

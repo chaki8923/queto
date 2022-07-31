@@ -5,8 +5,7 @@ console.log('room_channel.js読み込み');
 window.addEventListener('load',(event) => {
   console.log('loadイベント読み込み');
   const data = document.getElementById("data");
-  const notice = document.getElementById("notice");
-  if (data === null && notice  === null) {
+  if (data === null) {
     console.log('dataなし');
     return
   }
@@ -31,16 +30,29 @@ window.addEventListener('load',(event) => {
   
       received(data) {
         // Called when there's incoming data on the websocket for this channel
-  
+          console.log(data.message_id);
+          console.log(user_id);
+          console.log(data);
+          
           document.getElementById("message_content").value = ''
           const container = document.getElementById("container")
-          container.insertAdjacentHTML('beforeend', data['message'])
+
+          if(data.message_id == user_id){
+            console.log('MYMY');
+            
+            const h = '<div class="chat-line my" >' +  data['message'] + '</div>'
+            container.insertAdjacentHTML('beforeend', h)
+          }else{
+            console.log('YOUYOU');
+            const h = '<div class="chat-line you" >' +  data['message'] + '</div>'
+            container.insertAdjacentHTML('beforeend', h)
+            
+          }
+
         
-          //多分ここでnoticeに通知テンプレート渡す
        
       }
     })
   }
-  
 
   });

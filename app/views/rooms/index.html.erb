@@ -5,7 +5,8 @@
     <% @rooms.each do |room| %>
         <%# ルームテーブルに自分のidあれば表示 %>
         <% if room.user_ids.include?(@current_user.id) %>
-        <li><%= link_to room.name, user_room_path(@current_user,room) %></li>
+        <li><%= link_to room.name, user_room_path(@current_user,room) %>
+        <% if room.request_flg == true %><i class="fa-solid fa-circle-check request-check"></i><% end %></li>
         <% else %>
         <%# ルームテーブルに自分のidあれば表示なければリンクは表示しない。 %>
             <%= form_with(url: '/join_us',local: false, html:{class: 'form-group'})  do |f| %>
