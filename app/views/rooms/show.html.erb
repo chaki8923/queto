@@ -1,14 +1,8 @@
  <%= javascript_pack_tag 'chat_window' %> 
-<h1><%= @room.name %></h1>
-<div id="data" data-id="<%= @room.id %>" data-user-id="<%= @current_user.id %>"></div>
-  <%= form_with(model: @message,local: false, html:{class: 'form-group'})  do |f| %>
-     <%= f.text_field :content,class: 'form-control message' %>
-     <%= f.hidden_field :user_id, value: @current_user.id %>
-     <%= f.hidden_field :room_id, value: @room.id %>
-     <%= f.submit '送信' %>
- <% end %>
+<h2 class="text-center"><%= @room.name %></h2>
 
-<div id="container">
+
+<div id="container" class="chat-window">
 <% @messages.map do |message| %>
   <div class="chat-line <% if message.user_id == @current_user.id %> my <%  else %> you <% end %>" >
       <%if message.user.avatar.blank? %>
@@ -18,7 +12,15 @@
     <%end%>
   <%# ルームの作成者であればメッセージ表示 %>
     <% if message.request_flg.nil? %>
-     <span class="message-content"><%= message.content %></span>
+     <p class="message-content">
+     <% if message.user.adult_flg == true %>
+      <%= message.convert_old_message %>
+     <% else %>
+      <%= message.convert_young_message %>
+     <% end %>
+     <span class="date"><%= message.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></span>
+     </p>
+     
     <%else%>
      <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
         <%= f.hidden_field :user_id, value: message.user.id %>
@@ -30,5 +32,16 @@
   </div>
     <%= render partial: 'messages/message', locals: {message: message} %>
 <% end %>
+</div>
+<div id="data" data-id="<%= @room.id %>" data-user-id="<%= @current_user.id %>"></div>
+
+<div class="message-form">
+  <%= form_with(model: @message,local: false, html:{class: 'form-group'})  do |f| %>
+     <%= f.text_field :content,class: 'form-control message' %>
+     <%= f.hidden_field :user_id, value: @current_user.id %>
+     <%= f.hidden_field :room_id, value: @room.id %>
+     <button class="js-form-submit"></button>
+ <% end %>
+     <i class="fa-solid fa-paper-plane fa-2x js-message-submit paper-pranet"></i>
 </div>
 

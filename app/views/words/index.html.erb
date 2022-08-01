@@ -14,7 +14,7 @@
       <th scope="row"><%= index + 1 %></th>
       <td><%= word.term %></td>
       <td><%= word.conversion %></td>
-      <td><%= link_to "Edit", edit_word_path(@current_user),class: 'btn btn-success' %><td>
+      <td><%= link_to "Edit", edit_word_path(word),class: 'btn btn-success' %><td>
     </tr>
   <% end %>
   </tbody>

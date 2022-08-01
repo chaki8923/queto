@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :users, through: :room_requests
   mount_uploader :avatar, AvatarUploader
 
-  has_secure_password validations: true
+
   # before_create :create_remember_token
 
   scope :email_select, EmailChakiQuery
@@ -18,8 +18,8 @@ class User < ApplicationRecord
     Digest::SHA256.hexdigest(token.to_s)
   end
 
-  validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 4 }, allow_nil: true
+  validates :name, presence: true, uniqueness: true
+
 
   private
 

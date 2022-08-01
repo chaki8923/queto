@@ -37,4 +37,5 @@ Rails.application.routes.draw do
   # root to: 'auth#home'  
   resources :auth
   resources :users
+
 end

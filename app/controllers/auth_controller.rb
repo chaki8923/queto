@@ -37,7 +37,7 @@ class AuthController < ApplicationController
 
   def get_user
     @user = @current_user
-    render json: {id: @user.id},status: 200
+    render json: { id: @user.id }, status: 200
   end
 
   def update_avatar
@@ -45,15 +45,15 @@ class AuthController < ApplicationController
     puts 'パラメータ'
     puts user_params
     if @user.update(user_params)
-      render json: {id: @user.id,avatar: @user.avatar},status: 200
+      render json: { id: @user.id, avatar: @user.avatar }, status: 200
     else
-      render json: {message:'失敗しました',error: @user.errors.messages},status: 400
+      render json: { message: '失敗しました', error: @user.errors.messages }, status: 400
     end
-   
   end
+
   private
 
   def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_token,:avatar)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_token, :avatar, :adult_flg)
   end
 end

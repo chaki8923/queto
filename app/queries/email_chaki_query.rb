@@ -6,8 +6,8 @@ class EmailChakiQuery < Query
     @relation = relation
   end
 
-  def call(email = DEFAULT_EMAIL)
+  def call(name = DEFAULT_EMAIL)
     puts 'callメソッド'
-    relation.where('email like ?', "#{email}%")
+    relation.where('name like ?', "#{name}%")
   end
 end

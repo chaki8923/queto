@@ -6,7 +6,10 @@ class SessionController < ApplicationController
   end
 
   def create
-    if @user.authenticate(session_params[:password])
+    puts '名前--------!!'
+    puts params
+    @user = User.find_by!(name: session_params[:name])
+    if @user.present?
       login(@user)
       redirect_to words_new_path
     else
@@ -22,14 +25,14 @@ class SessionController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find_by!(email: session_params[:email])
-    rescue StandardError
-      flash.now[:danger] = t('.flash.invalid_mail')
-      render action: 'new'
-    end
+  def set_user
+    @user = User.find_by!(name: session_params[:name])
+  rescue StandardError
+    flash.now[:danger] = t('.flash.invalid_mail')
+    render action: 'new'
+  end
 
-    def session_params
-      params.require(:session).permit(:email, :password)
-    end
+  def session_params
+    params.require(:session).permit(:name)
+  end
 end

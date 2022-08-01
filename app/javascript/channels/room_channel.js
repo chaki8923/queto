@@ -38,12 +38,11 @@ window.addEventListener('load',(event) => {
           const container = document.getElementById("container")
 
           if(data.message_id == user_id){
-            console.log('MYMY');
-            
+
             const h = '<div class="chat-line my" >' +  data['message'] + '</div>'
             container.insertAdjacentHTML('beforeend', h)
           }else{
-            console.log('YOUYOU');
+
             const h = '<div class="chat-line you" >' +  data['message'] + '</div>'
             container.insertAdjacentHTML('beforeend', h)
             

@@ -9,7 +9,14 @@
     <%end%>
   <%# ルームの参加者はメッセージ表示 %>
     <% if message.request_flg.nil? %>
-     <span class="message-content"><%= message.content %></span>
+     <p class="message-content">
+     <% if message.user.adult_flg == true %>
+      <%= message.convert_old_message %>
+     <% else %>
+      <%= message.convert_young_message %>
+     <% end %>
+     <span class="date"><%= message.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></span>
+     </p>
     <%else%>
      <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
         <%= f.hidden_field :user_id, value: message.user.id %>

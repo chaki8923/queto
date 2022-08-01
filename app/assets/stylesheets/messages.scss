@@ -3,8 +3,15 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
+.chat-window{
+    overflow: scroll;
+    height: 80vh;
+    margin-bottom: 24px;
+}
+
 .chat_icon {
     width: 50px;
+    height: 50px;
 }
 
 .chat-line {
@@ -20,21 +27,29 @@
         min-width: 300px;
         padding: 12px;
         background-color: rgb(190, 230, 224);
-        border-radius: 99999px;
+        border-radius: 15px;
         margin-right: 12px;
         position: relative;
+        max-width: 350px;
 
         &::before {
             content: '';
             position: absolute;
             right: -10px;
-            bottom: 5px;
+            top: 0;
             border-style: solid;
             border-top: 20px solid transparent;
             border-bottom: 20px solid transparent;
             border-left: 50px solid rgb(190, 230, 224);
             border-right: 0;
             z-index: -1;
+        }
+        .date{
+            position: absolute;
+            bottom: -25px;
+            left: 20px;
+            width: 100%;
+            font-size: 12px;
         }
     }
 }
@@ -43,16 +58,18 @@
     
     .message-content {
         min-width: 300px;
+        max-width: 350px;
         padding: 12px;
         background-color: rgb(237, 217, 231);
-        border-radius: 99999px;
+        border-radius: 15px;
         margin-left: 12px;
         position: relative;
+
         &::before {
                 content: '';
                 position: absolute;
                 left: -10px;
-                bottom: 5px;
+                top: 0;
                 border-style: solid;
                 border-top: 20px solid transparent;
                 border-bottom: 20px solid transparent;
@@ -60,9 +77,35 @@
                 border-left: 0;
                 z-index: -1;
         }
+        .date{
+            position: absolute;
+            bottom: -25px;
+            left: 10px;
+            width: 100%;
+            font-size: 12px;
+        }
     }
+}
+
+.message-form{
+    display: flex;
+}
+
+.form-group{
+    width: 80%;
 }
 
 .request-check{
     color: rgb(219, 111, 111);
 }
+
+.js-form-submit{
+    display: none;
+}
+
+.paper-pranet{
+    color: rgb(88, 148, 205);
+    cursor: pointer;
+    margin-left: 10px;
+}
+

@@ -10,33 +10,9 @@
           <span class="alert"><%= message %></span>
         <% end %> 
       </div>
-      <div class="mb-3">
-        <%= f.label :email,class: 'form-label' %>
-        <%= f.email_field :email,class: 'form-control' %>
-        <% @user.errors.full_messages_for(:email).each do |message| %>
-          <span class="alert"><%= message %></span>
-        <% end %> 
-      </div>
-      <div class="mb-3">
-        <%= f.label :password,class: 'form-label' %>
-        <%= f.password_field :password,class: 'form-control' %>
-        <% @user.errors.full_messages_for(:password).each do |message| %>
-          <span class="alert"><%= message %></span>
-        <% end %>
-      </div>
-      <div class="mb-3">
-        <%= f.label :password_confirmation,class: 'form-label' %>
-        <%= f.password_field :password_confirmation,class: 'form-control' %>
-         <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
-          <span class="alert"><%= message %></span>
-         <% end %>
-      </div>
-      <%# <div class="mb-3"> %>
-        <%# <%= f.label :avatar,class: 'form-label' %> 
-        <%# <%= f.file_field :avatar,class: 'form-control' %>
-      <%# </div> %>
 
       
       <%= f.submit "Edit", class: 'btn btn-primary' %>
       <% end %>
+       <a class="btn btn-info" href="/auth/<%=@current_user.id%>/avatar">アイコン登録</a>
   </div>

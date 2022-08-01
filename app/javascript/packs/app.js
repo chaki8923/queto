@@ -62,6 +62,12 @@ $(function () {
       location.reload()
       
     },1000 );
+  });
+
+
+  $('.js-message-submit').on('click',function(){
+    $('.js-form-submit').click();
+
   })
 
 })
