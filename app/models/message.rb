@@ -5,6 +5,12 @@ class Message < ApplicationRecord
 
   def template
     # messageコントローラーからmessageとuser情報を渡してる。js側にテンプレートごと渡す。
-    ApplicationController.renderer.render partial: 'messages/message', locals: { message: self, current_user: user }
+    ApplicationController.renderer.render partial: 'messages/message_old', locals: { message: self}
   end
+  def template_young
+    # messageコントローラーからmessageとuser情報を渡してる。js側にテンプレートごと渡す。
+    ApplicationController.renderer.render partial: 'messages/message_young', locals: { message: self}
+  end
+ 
+ 
 end

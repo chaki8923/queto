@@ -1,5 +1,6 @@
 import consumer from "./consumer"
 
+
 console.log('room_channel.js読み込み');
 
 window.addEventListener('load',(event) => {
@@ -9,12 +10,12 @@ window.addEventListener('load',(event) => {
     console.log('dataなし');
     return
   }
-
+  
   if(data !== null){
-
+    
     const room_id = data.getAttribute("data-id");
     const user_id = data.getAttribute("data-user-id");
-    
+    const adult_flg = data.getAttribute("data-adult-flg");
     consumer.subscriptions.create(
       // "RoomChannel", 
     { channel: "RoomChannel", id: room_id, user_id: user_id },
@@ -30,7 +31,7 @@ window.addEventListener('load',(event) => {
   
       received(data) {
         // Called when there's incoming data on the websocket for this channel
-          console.log(data.message_id);
+
           console.log(user_id);
           console.log(data);
           
@@ -38,13 +39,27 @@ window.addEventListener('load',(event) => {
           const container = document.getElementById("container")
 
           if(data.message_id == user_id){
-
-            const h = '<div class="chat-line my" >' +  data['message'] + '</div>'
-            container.insertAdjacentHTML('beforeend', h)
-          }else{
-
-            const h = '<div class="chat-line you" >' +  data['message'] + '</div>'
-            container.insertAdjacentHTML('beforeend', h)
+              if(adult_flg){
+                console.log('親父');
+                const h = '<div class="chat-line my" >'  + data['message_young'] + '</div>'
+                container.insertAdjacentHTML('beforeend', h)
+                
+              }else{
+                console.log('若者');
+                const h = '<div class="chat-line my" >'  + data['message_old'] + '</div>'
+                container.insertAdjacentHTML('beforeend', h)
+              }
+            }else{
+              if(adult_flg){
+                console.log('親父');
+                const h = '<div class="chat-line my" >'  + data['message_young'] + '</div>'
+                container.insertAdjacentHTML('beforeend', h)
+              }else{
+              console.log('若者');
+              const h = '<div class="chat-line my" >'  + data['message_old'] + '</div>'
+              container.insertAdjacentHTML('beforeend', h)
+              
+            }
             
           }
 

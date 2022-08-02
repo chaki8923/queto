@@ -2,21 +2,17 @@
 
   <%# actioncable時のみ表示させる %>
   <% if @current_user.nil?  %>
-    <%if message.user.avatar.blank? %>
+     <%if message.user.avatar.blank? %>
         <img src="/assets/default_icon.png" alt="" class="chat_icon">
      <%else%>
         <%= image_tag message.user.avatar.url,class: 'chat_icon'%>
-    <%end%>
+     <%end%>
   <%# ルームの参加者はメッセージ表示 %>
     <% if message.request_flg.nil? %>
-     <p class="message-content">
-     <% if message.user.adult_flg == true %>
-      <%= message.convert_old_message %>
-     <% else %>
-      <%= message.convert_young_message %>
-     <% end %>
-     <span class="date"><%= message.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></span>
-     </p>
+      <p class="message-content">
+        <%= message.convert_young_message %>
+      <span class="date"><%= message.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></span>
+      </p>
     <%else%>
      <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
         <%= f.hidden_field :user_id, value: message.user.id %>

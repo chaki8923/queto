@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
-  before_action :set_user_id_to_cookie
   before_action :require_sign_in!
   helper_method :signed_in?
 
@@ -34,7 +33,5 @@ class ApplicationController < ActionController::Base
 
   # ActionCable用
   # login時にセットするようにはしているが、それだけだとすでにログインしているユーザーに対してクッキーをセットできないので暫定的にこうする
-  def set_user_id_to_cookie
-    cookies.permanent[:user_id] = @current_user.id if @current_user
-  end
+  
 end

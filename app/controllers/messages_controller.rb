@@ -19,16 +19,14 @@ class MessagesController < ApplicationController
 
     @words.map do |word|
       if @message.content.include?(word.term)
-
         create_young_message(@message, word)
       elsif @message.content.include?(word.conversion)
-
         create_old_message(@message, word)
       end
     end
 
     # js側にデータ渡してる
-    RoomChannel.broadcast_to(@room, message_id: @message.user_id, user: @user, message: @message.template)
+    RoomChannel.broadcast_to(@room, message_id: @message.user_id, user: @user, message_old: @message.template,message_young: @message.template_young)
   end
 
   def join

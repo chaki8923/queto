@@ -6,6 +6,8 @@ class RoomChannel < ApplicationCable::Channel
     @room = @user.rooms.find_by(id: params[:id])
     puts @room
     reject if @room.nil?
+    puts 'サブスク'
+    puts current_user.name
     stream_for(@room)
   end
 

@@ -16,7 +16,9 @@ class RoomsController < ApplicationController
     @messages = @room.messages.all.order(created_at: 'ASC')
     # @messages = @messages.room_requests.all
     @message = @room.messages.build
-    puts 'showメソッド'
+    @user = User.find_by(id: params[:user_id])
+    @current_user_adult = @user.adult_flg
+
   end
 
   def create
