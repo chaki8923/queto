@@ -37,5 +37,8 @@ Rails.application.routes.draw do
   # root to: 'auth#home'  
   resources :auth
   resources :users
+  resources :old_judgements
+
+  get 'get_judgement', to: 'old_judgements#get_judgement'
 
 end

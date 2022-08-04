@@ -17,10 +17,11 @@ class MessagesController < ApplicationController
     @room = Room.find_by(id: message_params[:room_id])
     @words = Word.all
 
+     
     @words.map do |word|
-      if @message.content.include?(word.term)
+      if @message.content.include?(word.term) && @current_user.adult_flg.nil? # 若者が発した言葉のみ変換。おじさんの背伸びは変換しないであげる
         create_young_message(@message, word)
-      elsif @message.content.include?(word.conversion)
+      elsif @message.content.include?(word.conversion) && @current_user.adult_flg == true  # おじさんが発信したら若者言葉に変換。若者の優しさは変換しない
         create_old_message(@message, word)
       end
     end
@@ -41,11 +42,8 @@ class MessagesController < ApplicationController
   def permission
     @current_room = Room.find_by(id: params['room_id'])
     message = Message.where(user_id: params['user_id'], room_id: params['room_id']).where.not(request_flg: nil).first
-    puts 'ID!!!!!!'
-    puts params
     @name = User.find_by(id: params['push_user']).name
     if Room.find_or_create_by(id: @current_room.id, name: @current_room.name)
-
       message.update(convert_old_message: "#{@name}さん承認ありがとう！", convert_young_message: "#{@name}さん承認ありがとう！", request_flg: nil)
       UserRoom.find_or_create_by(user_id: params['user_id'], room_id: params['room_id'])
     end

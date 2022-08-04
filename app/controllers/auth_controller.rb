@@ -16,7 +16,7 @@ class AuthController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(@user)
-      redirect_to home_path
+      redirect_to "/auth/#{@user.id}/avatar"
     else
       render 'new', status: :unprocessable_entity # これないとバリデーション出ない
     end
@@ -42,8 +42,6 @@ class AuthController < ApplicationController
 
   def update_avatar
     @user = User.find(params[:id])
-    puts 'パラメータ'
-    puts user_params
     if @user.update(user_params)
       render json: { id: @user.id, avatar: @user.avatar }, status: 200
     else
@@ -54,6 +52,6 @@ class AuthController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :remember_token, :avatar, :adult_flg)
+    params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg)
   end
 end

@@ -13,3 +13,43 @@
         text-align: center;
     }
 }
+
+.p-form__group{
+    text-align: center;
+}
+
+.cr-boundary{
+    margin-top: 24px!important;
+}
+
+.file-btn__group{
+    position: relative;
+}
+
+.file-btn{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    cursor: pointer;
+}
+
+.question{
+    text-align: center;
+    width: 350px;
+    height: 480px;
+    margin: 120px auto;
+    overflow: hidden;
+    img{
+        width: 350px;
+        object-fit: contain;
+    }
+}
+.btn_group{
+    display: flex;
+    margin-top: 24px;
+    justify-content: center;
+}

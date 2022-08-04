@@ -1,0 +1,2 @@
+class OldJudgement < ApplicationRecord
+end

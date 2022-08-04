@@ -39,23 +39,19 @@ window.addEventListener('load',(event) => {
           const container = document.getElementById("container")
 
           if(data.message_id == user_id){
-              if(adult_flg){
-                console.log('親父');
+              if(adult_flg){//自分が発信者でおじさん
                 const h = '<div class="chat-line my" >'  + data['message_young'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
                 
-              }else{
-                console.log('若者');
+              }else{//自分が発信者で若者
                 const h = '<div class="chat-line my" >'  + data['message_old'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
               }
             }else{
-              if(adult_flg){
-                console.log('親父');
+              if(adult_flg){//相手が発信者でおじさん
                 const h = '<div class="chat-line my" >'  + data['message_young'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
-              }else{
-              console.log('若者');
+              }else{//相手が発信者で若者
               const h = '<div class="chat-line my" >'  + data['message_old'] + '</div>'
               container.insertAdjacentHTML('beforeend', h)
               

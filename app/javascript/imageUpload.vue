@@ -90,12 +90,16 @@ export default {
 </script>
 <template>
   <div class="Image-uploader-wrapper Image-uploader">
+    <div class="file-btn__group">
       <input
         accept="image/png, image/jpeg, image/bmp"
         type="file"
         @change="onImageUploaded"
         ref="image"
+        class="file-btn"
       />
+      <span class="btn btn-secondary">ファイルを選択</span>
+    </div>
     <div id="croppie" v-show="shouldCropp">
       <span
         @click="cropFile"
