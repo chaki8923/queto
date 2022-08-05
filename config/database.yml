@@ -89,5 +89,5 @@ production:
   encoding: unicode
   pool: 5
   database: myapp_production
-  username: root
+  username: postgres
   password: <%= ENV['DATABASE_PASSWORD'] %>
