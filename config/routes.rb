@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root  'session#create'
+
   get 'words/new'
   get 'words/index'
   get 'words/:id/edit', to: 'words#edit'
