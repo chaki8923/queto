@@ -89,4 +89,4 @@ production:
   encoding: unicode
   database: myapp_production
   username: postgres
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: chaki-ry
