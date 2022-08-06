@@ -44,15 +44,17 @@ window.addEventListener('load',(event) => {
                 container.insertAdjacentHTML('beforeend', h)
                 
               }else{//自分が発信者で若者
+                console.log('young1');
+                
                 const h = '<div class="chat-line my" >'  + data['message_old'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
               }
             }else{
               if(adult_flg){//相手が発信者でおじさん
-                const h = '<div class="chat-line my" >'  + data['message_young'] + '</div>'
+                const h = '<div class="chat-line you" >'  + data['message_young'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
               }else{//相手が発信者で若者
-              const h = '<div class="chat-line my" >'  + data['message_old'] + '</div>'
+              const h = '<div class="chat-line you" >'  + data['message_old'] + '</div>'
               container.insertAdjacentHTML('beforeend', h)
               
             }

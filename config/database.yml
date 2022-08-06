@@ -18,8 +18,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  # host: db
-  username: postgres
+  host: db
+  username: root
   password: password
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -43,9 +43,9 @@ development:
   # domain sockets, so uncomment these lines.
   #host: localhost
 
-  # The TCP port the server listens on. Defaults to 5432.
+  # The TCP port the server listens on. Defaults to 5434.
   # If your server runs on a different port number, change accordingly.
-  #port: 5432
+  #port: 5434
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
