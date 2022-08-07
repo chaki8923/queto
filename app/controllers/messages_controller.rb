@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
 
      
     @words.map do |word|
-      if @message.content.include?(word.term) && @current_user.adult_flg.nil? # 若者が発した言葉のみ変換。おじさんの背伸びは変換しないであげる
+      if @message.content.include?(word.term) && @current_user.adult_flg == false # 若者が発した言葉のみ変換。おじさんの背伸びは変換しないであげる
         create_young_message(@message, word)
       elsif @message.content.include?(word.conversion) && @current_user.adult_flg == true  # おじさんが発信したら若者言葉に変換。若者の優しさは変換しない
         create_old_message(@message, word)
@@ -30,15 +30,17 @@ class MessagesController < ApplicationController
     RoomChannel.broadcast_to(@room, message_id: @message.user_id, user: @user, message_old: @message.template,message_young: @message.template_young)
   end
 
+  # 参加リクエスト
   def join
     @message = Message.create!(content: params['content'], room_id: params['room_id'], user_id: @current_user.id,
-                               request_flg: params['request_flg'])
-    @room = Room.find_by(id: params['room_id'])
-    @room.update!(request_flg: true)
-    RoomRequest.find_or_create_by(user_id: @current_user.id, room_id: params['room_id'])
-    RoomChannel.broadcast_to(@room, message: @message.template)
-  end
-
+      request_flg: params['request_flg'])
+      @room = Room.find_by(id: params['room_id'])
+      @room.update!(request_flg: true)
+      RoomRequest.find_or_create_by(user_id: @current_user.id, room_id: params['room_id'])
+      RoomChannel.broadcast_to(@room, message: @message.template)
+    end
+    
+  # 参加リクエストの許可
   def permission
     @current_room = Room.find_by(id: params['room_id'])
     message = Message.where(user_id: params['user_id'], room_id: params['room_id']).where.not(request_flg: nil).first

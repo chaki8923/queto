@@ -42,5 +42,6 @@ Rails.application.routes.draw do
   resources :old_judgements
 
   get 'get_judgement', to: 'old_judgements#get_judgement'
+  post 'create_judgement', to: 'old_judgements#create_judgement'
 
 end

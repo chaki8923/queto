@@ -53,3 +53,19 @@
     margin-top: 24px;
     justify-content: center;
 }
+
+.home-container{
+    position: relative;
+    padding: 40px 0;
+    h1{
+        font-weight: bold;
+    }
+}
+
+.image-container{
+    display: flex;
+    justify-content: center;
+}
+.home-image{
+    width: 80%;
+}
