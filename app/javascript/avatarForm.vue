@@ -71,7 +71,8 @@ export default {
         console.log(error);
         this.error = "登録に失敗しました";
       }
-       const link = location.protocol + "//" + location.hostname + ":3000" + "/home";
+       const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
+      //  const link = location.protocol + "//" + location.hostname + "/old_judgements";
       setTimeout(function(){
         location.replace(link);
       },300)
