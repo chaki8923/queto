@@ -6,8 +6,7 @@ class SessionController < ApplicationController
   end
 
   def create
-    puts '名前--------!!'
-    puts params
+
     @user = User.find_by!(name: session_params[:name])
     if @user.present?
       login(@user)
