@@ -43,6 +43,7 @@ export default {
          this.image["fileName"]);
       try {
         const res = axios.post(
+          // location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
           `http://localhost:3000/auth/${this.userId}/avatar`,
           formData,
           {
@@ -83,6 +84,13 @@ export default {
         .catch(function (err) {
           console.log(err);
         });
+      // axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+      //     this.userId = res.data.id
+      //     return res;
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //   });
     }
   },
   mounted() {
