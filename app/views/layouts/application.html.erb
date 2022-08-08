@@ -14,7 +14,7 @@
   </head>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" alt="" class="logo"></a>
+      <a class="navbar-brand" href="/"><%= image_tag asset_path('logo.png'), class: 'logo' %></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -62,7 +62,7 @@
     <%if(@current_user.present?)%>
       <a class="nav-item icon-wrapper" href="/auth/<%=@current_user.id%>/avatar">
         <%if(@current_user.avatar.blank?)%>
-          <img src="/assets/images/default_icon.png" alt="" class="default-icon">
+          <%= image_tag asset_path('default_icon.png'), class: 'default-icon' %>
         <%else%>
           <%= image_tag @current_user.avatar.url,class: 'nav-icon__pc' %>
         <%end%>
