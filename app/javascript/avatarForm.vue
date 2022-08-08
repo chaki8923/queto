@@ -43,8 +43,8 @@ export default {
          this.image["fileName"]);
       try {
         const res = axios.post(
-          location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
-          // `http://localhost:3000/auth/${this.userId}/avatar`,
+          // location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
+          `http://localhost:3000/auth/${this.userId}/avatar`,
           formData,
           {
             headers: {
@@ -71,27 +71,27 @@ export default {
         console.log(error);
         this.error = "登録に失敗しました";
       }
-      //  const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
-       const link = location.protocol + "//" + location.hostname + "/old_judgements";
+       const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
+      //  const link = location.protocol + "//" + location.hostname + "/old_judgements";
       setTimeout(function(){
         location.replace(link);
       },300)
     },
     getUser(){
-      // axios.get("http://localhost:3000/get_user").then((res) => {
-      //     this.userId = res.data.id
-      //     return res;
-      //   })
-      //   .catch(function (err) {
-      //     console.log(err);
-      //   });
-      axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+      axios.get("http://localhost:3000/get_user").then((res) => {
           this.userId = res.data.id
           return res;
         })
         .catch(function (err) {
           console.log(err);
         });
+      // axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+      //     this.userId = res.data.id
+      //     return res;
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //   });
     }
   },
   mounted() {
