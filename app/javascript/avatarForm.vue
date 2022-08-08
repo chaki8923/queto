@@ -43,8 +43,8 @@ export default {
          this.image["fileName"]);
       try {
         const res = axios.post(
-          // location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
-          `http://localhost:3000/auth/${this.userId}/avatar`,
+          location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
+          // `http://localhost:3000/auth/${this.userId}/avatar`,
           formData,
           {
             headers: {
