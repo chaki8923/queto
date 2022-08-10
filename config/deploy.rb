@@ -3,6 +3,7 @@ lock "~> 3.17.0"
 
 set :application, "queto"
 set :repo_url, "git@github.com:chaki8923/queto.git"
+set :branch, ENV['BRANCH'] || "main"
 
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
