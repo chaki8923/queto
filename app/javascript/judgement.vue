@@ -38,7 +38,6 @@ export default {
         this.oji_answer = this.oji_answer + $oji_count;
         if (this.oji_answer >= 2) {
           console.log("oji 処理");
-
           const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 1;
           // const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 1;
           this.axios_post(link);
