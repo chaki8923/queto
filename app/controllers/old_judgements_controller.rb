@@ -1,4 +1,6 @@
 class OldJudgementsController < ApplicationController
+
+    skip_before_action :adult_flg!
     def index
         if @current_user.adult_flg.nil?
             # adult_flg がnilなら表示

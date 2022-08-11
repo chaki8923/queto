@@ -2,7 +2,8 @@
 lock "~> 3.17.0"
 
 set :application, "queto"
-set :repo_url, "git@example.com:chaki8923/queto.git"
+set :repo_url, "git@github.com:chaki8923/queto.git"
+set :branch, ENV['BRANCH'] || "main"
 
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
@@ -19,7 +20,7 @@ set :keep_releases, 5
 set :rbenv_type, :user
 set :rbenv_ruby, '2.7.6'
 
-ここからUnicornの設定
+# ここからUnicornの設定
 # Unicornのプロセスの指定
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 

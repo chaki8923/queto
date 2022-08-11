@@ -22,5 +22,6 @@ services:
       - "3000:3000"
     volumes:
       - .:/myapp
+      - ./.ssh/:/myapp/.ssh
 volumes:
   psgl_data:
