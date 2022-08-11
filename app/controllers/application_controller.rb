@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
   before_action :require_sign_in!
+  before_action :adult_flg!
   helper_method :signed_in?
 
   protect_from_forgery with: :exception # csrf対策
@@ -26,9 +27,17 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
+  
   def require_sign_in!
     redirect_to login_path unless signed_in?
+  end
+
+  def adult_flg!
+    if @current_user.present?
+      if  @current_user.adult_flg.nil?
+        redirect_to old_judgements_path
+      end
+    end
   end
 
   # ActionCable用

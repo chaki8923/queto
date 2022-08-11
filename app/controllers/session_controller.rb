@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
+  skip_before_action :adult_flg!, only: [:new, :create,:destroy]
   before_action :set_user, only: [:create]
 
   def new
@@ -11,7 +12,7 @@ class SessionController < ApplicationController
     @user = User.find_by!(name: session_params[:name])
     if @user.present?
       login(@user)
-      redirect_to words_new_path
+      redirect_to home_path
     else
       flash.now[:danger] = t('.flash.invalid_password')
       render 'new'

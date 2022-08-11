@@ -109,7 +109,8 @@ export default {
         切り抜く
       </span>
     </div>
-    <img id="js-drawPicture" :src="croppieFile" alt="" v-if="!shouldCropp" />
+    <img id="js-drawPicture" class="confirm-image" :src="croppieFile" alt="" v-if="!shouldCropp" />
     {{error}}
+
   </div>
 </template>

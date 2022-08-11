@@ -36,10 +36,16 @@
     @include mq(md) {
         display: block !important;
     }
+    @include mq(sp) {
+        display: block !important;
+    }
     &__pc {
         width: 55px;
         float: right;
         @include mq(md) {
+            display: none;
+        }
+        @include mq(sp) {
             display: none;
         }
     }
@@ -48,7 +54,12 @@
         @include mq(md) {
             width: 50px;
             float: none;
-            display: inline-block;
+            display: block!important;
+        }
+        @include mq(sp) {
+            width: 50px;
+            float: none;
+            display: block!important;
         }
     }
 }
@@ -63,6 +74,5 @@
 
 .icon-wrapper{
     width: 60px;
-    background: #fff;
     border-radius: 50%;
 }
