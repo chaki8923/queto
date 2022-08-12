@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h2>画像登録</h2>
+    <h2 class="text-center mt-5">画像登録</h2>
     <div class="p-form__group">
       <image-upload @hide_btn="hide_btn" @show_btn="show_flg" @imagePath="image = $event" />
       <div class="error">
         <p>{{ error }}</p>
       </div>
-      <button  v-if="show_btn" @click="updateAvatar" class="btn btn-primary">画像登録</button>
+      <button  v-if="show_btn" @click="updateAvatar" class="btn btn-primary">これで登録</button>
     </div>
   </div>
 </template>

@@ -2,13 +2,23 @@
  <div class="home-container">
   <% if @current_user.adult_flg == true %>
     <h1 class="text-center">ようこそ、お・じ・さ・ん</h1>
-    <div class="image-container">
-      <img src="/assets/oji_face.jpeg" alt="" class="home-image">
+    <div class="image-container mb-5">
+       <%= image_tag asset_path('oji_face.jpeg'), class: 'home-image' %>
     </div>
+    <div class="text-center">
+       <%= link_to  (user_rooms_path(@current_user.id)),class: 'btn btn-primary m-auto', method: :get do%>
+       早速トーク開始　<i class="fa-solid fa-comment-dots"></i>
+       <% end %>
+   </div>
   <% else %>
     <h1 class="text-center">ようこそ、希望に満ちた若者</h1>
-    <div class="image-container">
-      <img src="/assets/baby.jpeg" alt="" class="home-image">
+    <div class="image-container mb-5">
+       <%= image_tag asset_path('baby.jpeg'), class: 'home-image' %>
+    </div>
+    <div class="text-center">
+       <%= link_to  (user_rooms_path(@current_user.id)),class: 'btn btn-primary m-auto', method: :get do%>
+       早速トーク開始　<i class="fa-solid fa-comment-dots"></i>
+       <% end %>
     </div>
   <% end %>
  </div>
