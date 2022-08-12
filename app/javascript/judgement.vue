@@ -51,6 +51,7 @@ export default {
           this.axios_post(link);
           // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
           const home_link = location.protocol + "//" + location.hostname + "/home";
+          console.log(home_link);
           location.replace(home_link);
           return;
         }
