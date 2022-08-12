@@ -3,7 +3,7 @@
   <%# actioncable時のみ表示させる %>
   <% if @current_user.nil?  %>
      <%if message.user.avatar.blank? %>
-        <img src="/assets/default_icon.png" alt="" class="chat_icon">
+        <%= image_tag asset_path('default_icon.png'), class: 'chat_icon' %>
      <%else%>
         <%= image_tag message.user.avatar.url,class: 'chat_icon'%>
      <%end%>

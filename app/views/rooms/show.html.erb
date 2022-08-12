@@ -6,7 +6,7 @@
 <% @messages.map do |message| %>
   <div class="chat-line <% if message.user_id == @current_user.id %> my <%  else %> you <% end %>" >
       <%if message.user.avatar.blank? %>
-        <img src="/assets/default_icon.png" alt="" class="chat_icon">
+         <%= image_tag asset_path('default_icon.png'), class: 'chat_icon' %>
      <%else%>
         <%= image_tag message.user.avatar.url,class: 'chat_icon'%>
     <%end%>
