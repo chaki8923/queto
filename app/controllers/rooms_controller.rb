@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     if @room.save
       user_room = UserRoom.create(user_id: params[:user_id], room_id: @room.id)
-      redirect_to home_path, notice: '登録されました'
+      redirect_to user_rooms_path(@current_user)
     end
   end
 
