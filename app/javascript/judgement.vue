@@ -113,7 +113,7 @@ export default {
   <div class="container">
     <div class="question mt-5">
       <p>{{ question.title }}</p>
-      <img :src="question.image" alt="" />
+      <img :src="require(question.image)" alt="" />
     </div>
     <div class="btn_group">
       <button
