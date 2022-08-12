@@ -7,6 +7,9 @@
     overflow: scroll;
     height: 80vh;
     margin-bottom: 24px;
+    @include mq(sp){
+        height: 70vh;
+    }
 }
 
 .chat_icon {
@@ -36,7 +39,7 @@
         max-width: 350px;
         @include mq(sp){
             min-width: 250px;
-            max-width: 280px;
+            max-width: 260px;
         }
 
         &::before {
@@ -73,7 +76,7 @@
         position: relative;
         @include mq(sp){
             min-width: 250px;
-            max-width: 280px;
+            max-width: 260px;
         }
 
         &::before {
@@ -100,6 +103,7 @@
 
 .message-form{
     display: flex;
+    justify-content: center;
 }
 
 .form-group{
