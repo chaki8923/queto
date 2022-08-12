@@ -42,18 +42,18 @@ export default {
           const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 1;
           this.axios_post(link);
           // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
-          // const home_link = location.protocol + "//" + location.hostname + "/home";
-          // location.replace(home_link);
-          // return;
+          const home_link = location.protocol + "//" + location.hostname + "/home";
+          location.replace(home_link);
+          return;
         } else {
           // const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 0;
           const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 0;
           this.axios_post(link);
           // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
-          // const home_link = location.protocol + "//" + location.hostname + "/home";
-          // console.log(home_link);
-          // location.replace(home_link);
-          // return;
+          const home_link = location.protocol + "//" + location.hostname + "/home";
+          console.log(home_link);
+          location.replace(home_link);
+          return;
         }
       }
 
@@ -77,7 +77,7 @@ export default {
         this.count = 1;
         
       } else {
-        if(this.count == 2){
+        if(this.oji_answer >= 2){
           const home_link = location.protocol + "//" + location.hostname + "/home";
           location.replace(home_link);
           return;
