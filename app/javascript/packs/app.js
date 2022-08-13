@@ -68,20 +68,14 @@ $(function () {
   //自動スクロール
   $('.js-message-submit').on('click',function(){
     $('.js-form-submit').click();
-    var obj = document.getElementById('#container');
-    obj.scrollTop = obj.scrollHeight;
-    console.log('scroll');
+    var obj = document.getElementById('container');
+
     
-  })
-  
-  var obj = document.getElementById('container');
-  obj.scrollTop = obj.scrollHeight;
+  });
   
   $('.js-textarea').keypress(function(e) {
     if(e.which == 13) {
       
-      var obj = document.getElementById('container');
-      obj.scrollTop = obj.scrollHeight;
     }
   });
 

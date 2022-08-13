@@ -18,8 +18,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: db #local
-  # host: localhost #product
+  # host: db #local用
+  host: localhost #product用
   username: root
   password: password
   # For details on connection pooling, see Rails configuration guide

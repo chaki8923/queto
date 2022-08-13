@@ -6,7 +6,7 @@
 <% @messages.map do |message| %>
   <div class="chat-line <% if message.user_id == @current_user.id %> my <%  else %> you <% end %>" >
       <%if message.user.avatar.blank? %>
-        <img src="/assets/default_icon.png" alt="" class="chat_icon">
+         <%= image_tag asset_path('default_icon.png'), class: 'chat_icon' %>
      <%else%>
         <%= image_tag message.user.avatar.url,class: 'chat_icon'%>
     <%end%>
@@ -46,3 +46,9 @@
      <i class="fa-solid fa-paper-plane fa-2x js-message-submit paper-pranet"></i>
 </div>
 
+<script>
+
+  var obj = document.getElementById('container');
+  obj.scrollTop = obj.scrollHeight;
+  
+</script>
