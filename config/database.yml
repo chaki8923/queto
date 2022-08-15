@@ -89,5 +89,5 @@ production:
   adapter: postgresql
   encoding: unicode
   database: myapp_production
-  username: ojisan01
+  username: postgres
   password: password
