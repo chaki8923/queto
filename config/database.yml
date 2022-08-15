@@ -19,7 +19,7 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   # host: db #local用
-  host: localhost #product用
+  host: oji-database.ctwc7nv56krv.ap-northeast-1.rds.amazonaws.com #product用
   username: root
   password: password
   # For details on connection pooling, see Rails configuration guide
