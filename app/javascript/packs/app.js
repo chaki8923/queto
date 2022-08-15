@@ -6,7 +6,7 @@ $(function () {
     $('.dropdown-menu').toggle();
   });
 
-
+  console.log('aaaaaaaaa');
 
   $(document).on('click', function (e) {
     if (!$(e.target).closest('.dropdown-toggle').length) {

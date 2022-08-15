@@ -10,10 +10,6 @@ class OldJudgementsController < ApplicationController
     end
     
     def get_judgement
-            puts params
-            puts 'おじ回答回数'
-            puts params['oji_answer']
-  
             
             if params['id'].present? && params['id2'].present?
                 @question = OldJudgement.where.not(id: params['id']).where.not(id: params['id2']).first
@@ -32,10 +28,8 @@ class OldJudgementsController < ApplicationController
         end
 
         def create_judgement
-            puts 'ojiparams'
-            puts params
+
             if params['oji'].to_i == 1
-                puts 'あなたはおじさんでーーーーす！'
                 @user = User.find_by(id: @current_user.id)
                 @user.update!(adult_flg: true)
             else
