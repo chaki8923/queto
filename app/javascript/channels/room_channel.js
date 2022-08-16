@@ -66,6 +66,9 @@ window.addEventListener('load',(event) => {
             
           }
 
+          var obj = document.getElementById('container');
+          obj.scrollTop = obj.scrollHeight;
+
         
        
       }

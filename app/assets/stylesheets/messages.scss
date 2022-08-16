@@ -2,11 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-
+@import "mixin";
 .chat-window{
     overflow: scroll;
     height: 80vh;
     margin-bottom: 24px;
+    @include mq(sp){
+        height: 70vh;
+    }
 }
 
 .chat_icon {
@@ -17,6 +20,9 @@
 .chat-line {
     display: flex;
     margin-bottom: 16px;
+    @include mq(sp){
+        margin-bottom: 38px;
+    }
 
 }
 
@@ -31,6 +37,10 @@
         margin-right: 12px;
         position: relative;
         max-width: 350px;
+        @include mq(sp){
+            min-width: 250px;
+            max-width: 260px;
+        }
 
         &::before {
             content: '';
@@ -64,6 +74,10 @@
         border-radius: 15px;
         margin-left: 12px;
         position: relative;
+        @include mq(sp){
+            min-width: 250px;
+            max-width: 260px;
+        }
 
         &::before {
                 content: '';
@@ -89,6 +103,7 @@
 
 .message-form{
     display: flex;
+    justify-content: center;
 }
 
 .form-group{

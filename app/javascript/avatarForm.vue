@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h2>画像登録</h2>
+    <h2 class="text-center mt-5">画像登録</h2>
     <div class="p-form__group">
       <image-upload @hide_btn="hide_btn" @show_btn="show_flg" @imagePath="image = $event" />
       <div class="error">
         <p>{{ error }}</p>
       </div>
-      <button  v-if="show_btn" @click="updateAvatar" class="btn btn-primary">画像登録</button>
+      <button  v-if="show_btn" @click="updateAvatar" class="btn btn-primary">これで登録</button>
     </div>
   </div>
 </template>
@@ -43,7 +43,8 @@ export default {
          this.image["fileName"]);
       try {
         const res = axios.post(
-          `http://localhost:3000/auth/${this.userId}/avatar`,
+          location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
+          // `http://localhost:3000/auth/${this.userId}/avatar`,
           formData,
           {
             headers: {
@@ -70,13 +71,21 @@ export default {
         console.log(error);
         this.error = "登録に失敗しました";
       }
-       const link = location.protocol + "//" + location.hostname + ":3000" + "/home";
+      //  const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
+       const link = location.protocol + "//" + location.hostname + "/old_judgements";
       setTimeout(function(){
         location.replace(link);
       },300)
     },
     getUser(){
-      axios.get("http://localhost:3000/get_user").then((res) => {
+      // axios.get("http://localhost:3000/get_user").then((res) => {
+      //     this.userId = res.data.id
+      //     return res;
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //   });
+      axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
           this.userId = res.data.id
           return res;
         })

@@ -6,7 +6,7 @@ $(function () {
     $('.dropdown-menu').toggle();
   });
 
-
+  console.log('aaaaaaaaa');
 
   $(document).on('click', function (e) {
     if (!$(e.target).closest('.dropdown-toggle').length) {
@@ -65,10 +65,19 @@ $(function () {
   });
 
 
+  //自動スクロール
   $('.js-message-submit').on('click',function(){
     $('.js-form-submit').click();
+    var obj = document.getElementById('container');
 
-  })
+    
+  });
+  
+  $('.js-textarea').keypress(function(e) {
+    if(e.which == 13) {
+      
+    }
+  });
 
 })
 

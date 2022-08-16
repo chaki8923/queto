@@ -6,7 +6,7 @@
 <% @messages.map do |message| %>
   <div class="chat-line <% if message.user_id == @current_user.id %> my <%  else %> you <% end %>" >
       <%if message.user.avatar.blank? %>
-        <img src="/assets/default_icon.png" alt="" class="chat_icon">
+         <%= image_tag asset_path('default_icon.png'), class: 'chat_icon' %>
      <%else%>
         <%= image_tag message.user.avatar.url,class: 'chat_icon'%>
     <%end%>
@@ -22,11 +22,12 @@
      </p>
      
     <%else%>
-     <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group'}) do |f| %>
+     <%= form_with(url: permission_path(message.user.id), html:{class: 'form-group message-content'}) do |f| %>
         <%= f.hidden_field :user_id, value: message.user.id %>
         <%= f.hidden_field :room_id, value: message.room.id %>
          <%= f.hidden_field :push_user, value: params[:user_id] %>
-        <button class="btn btn-danger js-reload-btn"><%= message.content %></button>
+        <%= message.user.name %>です。<button class="btn btn-info js-reload-btn"><%= message.content %></button>
+      <span class="date"><%= message.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></span>
       <% end %>
     <%end%>
   </div>
@@ -37,7 +38,7 @@
 
 <div class="message-form">
   <%= form_with(model: @message,local: false, html:{class: 'form-group'})  do |f| %>
-     <%= f.text_field :content,class: 'form-control message' %>
+     <%= f.text_field :content,class: 'form-control message js-textarea' %>
      <%= f.hidden_field :user_id, value: @current_user.id %>
      <%= f.hidden_field :room_id, value: @room.id %>
      <button class="js-form-submit"></button>
@@ -45,3 +46,9 @@
      <i class="fa-solid fa-paper-plane fa-2x js-message-submit paper-pranet"></i>
 </div>
 
+<script>
+
+  var obj = document.getElementById('container');
+  obj.scrollTop = obj.scrollHeight;
+  
+</script>
