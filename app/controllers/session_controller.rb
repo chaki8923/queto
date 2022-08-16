@@ -7,9 +7,9 @@ class SessionController < ApplicationController
   end
 
   def create
-    puts '名前--------!!'
-    puts params
+
     @user = User.find_by!(name: session_params[:name])
+    @user.update(params[:avatar])
     if @user.present?
       login(@user)
       redirect_to home_path
@@ -34,6 +34,6 @@ class SessionController < ApplicationController
   end
 
   def session_params
-    params.require(:session).permit(:name)
+    params.require(:session).permit(:name,:avatar)
   end
 end
