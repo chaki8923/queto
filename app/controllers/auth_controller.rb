@@ -49,11 +49,25 @@ class AuthController < ApplicationController
       render json: { message: '失敗しました', error: @user.errors.messages }, status: 400
     end
   end
+  
+  def upload
+    filename = params[:filename]
+    puts 'S3----------------'
 
+    presigned_object = S3_BUCKET.presigned_post(
+      key: "uploads/test/#{@current_user.id}/#{filename}",
+      success_action_status: '201',
+      acl: 'public-read'
+  )
+  render json: { url: presigned_object.url, fields: presigned_object.fields }
+  end
+
+  
   private
 
-  def user_params
-    params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg)
-  end
+    def user_params
+      params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg)
+    end
+
 
 end

@@ -9,7 +9,6 @@ class SessionController < ApplicationController
   def create
 
     @user = User.find_by!(name: session_params[:name])
-    @user.update(params[:avatar])
     if @user.present?
       login(@user)
       redirect_to home_path

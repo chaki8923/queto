@@ -34,69 +34,78 @@ export default {
       console.log('hide');
       this.show_btn = false;
     },
+    getS3Path(){
+          const presignedObject = axios.get('http://localhost:3000/aws_signed?filename=' + this.image["fileName"]).then((res)=>{
+        console.log(res);
+      }).catch(function (err) {
+          console.log(err);
+        });
+    },
     updateAvatar() {
       //バックエンドに送るフォームを生成
-      let formData = new FormData();
-      formData.append(
-        "user[avatar]", 
-        this.image["blob"],
-         this.image["fileName"]);
-      try {
-        const res = axios.post(
-          location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
-          // `http://localhost:3000/auth/${this.userId}/avatar`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (!res) {
-          this.error = "新規登録できませんでした";
-          throw new Error("ログインできませんでした");
-        }
-        if (!this.error) {
-          console.log("登録成功");
-          console.log(res);
+      this.getS3Path();
+    //   let formData = new FormData();
+    //   formData.append(
+    //     "user[avatar]", 
+    //     this.image["blob"],
+    //      this.image["fileName"]);
+    //   try {
+    //     const res = axios.post(
+    //       // location.protocol + "//" + location.hostname + `/auth/${this.userId}/avatar`,
+    //       `http://localhost:3000/auth/${this.userId}/avatar`,
+    //       formData,
+    //       {
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //       }
+    //     );
+    //     if (!res) {
+    //       this.error = "新規登録できませんでした";
+    //       throw new Error("ログインできませんでした");
+    //     }
+    //     if (!this.error) {
+    //       console.log("登録成功");
+    //       console.log(res);
 
-          // window.sessionStorage.setItem([プロパティ名],[値])でセッションに保存できる。
-          window.sessionStorage.setItem(
-            ["flash_message"],
-            ["アイコンを登録しました"]
-          );
-        }
-        // return res;
-      } catch (error) {
-        console.log(error);
-        this.error = "登録に失敗しました";
-      }
-      //  const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
-       const link = location.protocol + "//" + location.hostname + "/old_judgements";
-      setTimeout(function(){
-        location.replace(link);
-      },300)
+    //       // window.sessionStorage.setItem([プロパティ名],[値])でセッションに保存できる。
+    //       window.sessionStorage.setItem(
+    //         ["flash_message"],
+    //         ["アイコンを登録しました"]
+    //       );
+    //     }
+    //     // return res;
+    //   } catch (error) {
+    //     console.log(error);
+    //     this.error = "登録に失敗しました";
+    //   }
+    //    const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
+    //   //  const link = location.protocol + "//" + location.hostname + "/old_judgements";
+    //   setTimeout(function(){
+    //     location.replace(link);
+    //   },300)
     },
     getUser(){
-      // axios.get("http://localhost:3000/get_user").then((res) => {
-      //     this.userId = res.data.id
-      //     return res;
-      //   })
-      //   .catch(function (err) {
-      //     console.log(err);
-      //   });
-      axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+      axios.get("http://localhost:3000/get_user").then((res) => {
           this.userId = res.data.id
           return res;
         })
         .catch(function (err) {
           console.log(err);
         });
+      // axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+      //     this.userId = res.data.id
+      //     return res;
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //   });
     }
   },
   mounted() {
     this.getUser();
     console.log(this.userId);
+    
   },
 };
 </script>
