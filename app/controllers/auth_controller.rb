@@ -28,6 +28,8 @@ class AuthController < ApplicationController
   end
 
   def update
+
+    puts 'ユーザーパラメーターーー'
     puts user_params
     @user = User.find(params[:id])
     if @user.update(user_params)
