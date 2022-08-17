@@ -4,5 +4,5 @@ Aws.config.update({
 })
 
 
-puts ENV['AWS_ACCESS_KEY_ID']
+puts 'アプリの初期化ーーーーーーーーー'
 S3_BUCKET = Aws::S3::Resource.new.bucket(ENV['BUCKET'])
