@@ -35,7 +35,8 @@ export default {
       this.show_btn = false;
     },
     getS3Path(){
-          const presignedObject = axios.get('http://localhost:3000/aws_signed?filename=' + this.image["fileName"]).then((res)=>{
+          // const presignedObject = axios.get('http://localhost:3000/aws_signed?filename=' + this.image["fileName"]).then((res)=>{
+          const presignedObject = axios.get('https://ojitalk/aws_signed?filename=' + this.image["fileName"]).then((res)=>{
         console.log(res);
       }).catch(function (err) {
           console.log(err);
@@ -86,20 +87,20 @@ export default {
     //   },300)
     },
     getUser(){
-      axios.get("http://localhost:3000/get_user").then((res) => {
-          this.userId = res.data.id
-          return res;
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-      // axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+      // axios.get("http://localhost:3000/get_user").then((res) => {
       //     this.userId = res.data.id
       //     return res;
       //   })
       //   .catch(function (err) {
       //     console.log(err);
       //   });
+      axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+          this.userId = res.data.id
+          return res;
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     }
   },
   mounted() {
