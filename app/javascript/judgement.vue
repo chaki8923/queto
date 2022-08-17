@@ -38,19 +38,19 @@ export default {
         this.oji_answer = this.oji_answer + $oji_count;
         if (this.oji_answer >= 2) {
           console.log("oji 処理");
-          // const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 1;
-          const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 1;
+          const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 1;
+          // const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 1;
           this.axios_post(link);
-          // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
-          const home_link = location.protocol + "//" + location.hostname + "/home";
+          const home_link = location.protocol + "//" + location.hostname + ":3000/home";
+          // const home_link = location.protocol + "//" + location.hostname + "/home";
           location.replace(home_link);
           return;
         } else {
           const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 0;
           // const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 0;
           this.axios_post(link);
-          // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
-          const home_link = location.protocol + "//" + location.hostname + "/home";
+          const home_link = location.protocol + "//" + location.hostname + ":3000/home";
+          // const home_link = location.protocol + "//" + location.hostname + "/home";
           console.log(home_link);
           location.replace(home_link);
           return;
@@ -62,31 +62,31 @@ export default {
         this.oji_answer = this.oji_answer + $oji_count;
 
         console.log("２回答");
-        // const link = location.protocol + "//" + location.hostname + ":3000/get_judgement?id=" + this.question.id + "&id2=" + this.second_id + "&oji_answer=" + this.oji_answer;
-        const link = location.protocol + "//" + location.hostname + "/get_judgement?id=" + this.question.id + "&id2=" + this.second_id + "&oji_answer=" + this.oji_answer;
+        const link = location.protocol + "//" + location.hostname + ":3000/get_judgement?id=" + this.question.id + "&id2=" + this.second_id + "&oji_answer=" + this.oji_answer;
+        // const link = location.protocol + "//" + location.hostname + "/get_judgement?id=" + this.question.id + "&id2=" + this.second_id + "&oji_answer=" + this.oji_answer;
         this.axios_get(link);
         this.count = 2;
         
       } else if (this.question) {//一度でもYESかNO押せばこっち
           console.log("１回答");
         this.oji_answer = this.oji_answer + $oji_count;
-        // const link = location.protocol + "//" + location.hostname + ":3000/get_judgement?id=" + this.question.id + "&oji_answer=" + this.oji_answer;
-        const link = location.protocol + "//" + location.hostname + "/get_judgement?id=" + this.question.id + "&oji_answer=" + this.oji_answer;
+        const link = location.protocol + "//" + location.hostname + ":3000/get_judgement?id=" + this.question.id + "&oji_answer=" + this.oji_answer;
+        // const link = location.protocol + "//" + location.hostname + "/get_judgement?id=" + this.question.id + "&oji_answer=" + this.oji_answer;
         this.axios_get(link);
         this.second_id = this.question.id;
         this.count = 1;
         
       } else {
         if(this.oji_answer >= 2){
-          // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
-          const home_link = location.protocol + "//" + location.hostname + "/home";
+          const home_link = location.protocol + "//" + location.hostname + ":3000/home";
+          // const home_link = location.protocol + "//" + location.hostname + "/home";
           location.replace(home_link);
           return;
         }
           console.log("0回答");
         this.oji_answer = this.oji_answer + $oji_count;
-        // const link = location.protocol + "//" + location.hostname + ":3000/get_judgement?oji_answer=" + this.oji_answer;
-        const link = location.protocol + "//" + location.hostname + "/get_judgement?oji_answer=" + this.oji_answer;
+        const link = location.protocol + "//" + location.hostname + ":3000/get_judgement?oji_answer=" + this.oji_answer;
+        // const link = location.protocol + "//" + location.hostname + "/get_judgement?oji_answer=" + this.oji_answer;
         this.axios_get(link);
       }
           

@@ -28,6 +28,7 @@ class AuthController < ApplicationController
   end
 
   def update
+    puts user_params
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to home_path, notice: '編集されました'
