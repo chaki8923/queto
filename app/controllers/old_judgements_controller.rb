@@ -5,7 +5,7 @@ class OldJudgementsController < ApplicationController
         if @current_user.adult_flg.nil?
             # adult_flg がnilなら表示
         else
-            # redirect_to home_path
+            redirect_to home_path
         end
     end
     
