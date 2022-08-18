@@ -76,7 +76,7 @@ export default {
        const link = location.protocol + "//" + location.hostname + "/old_judgements";
       setTimeout(function(){
         location.replace(link);
-      },300)
+      },500)
     },
     getUser(){
       // axios.get("http://localhost:3000/get_user").then((res) => {
