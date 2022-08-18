@@ -47,7 +47,7 @@ export default {
             location.replace(home_link);
           },300);
          
-          
+          return;
         } else {
           // const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 0;
           const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 0;
@@ -57,6 +57,8 @@ export default {
           setTimeout(function(){
             location.replace(home_link);
           },300);
+
+          return;
         }
       }
 
