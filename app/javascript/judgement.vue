@@ -83,8 +83,8 @@ export default {
         if(this.oji_answer >= 2){
           console.log('遷移！');
           // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
-          const home_link = location.protocol + "//" + location.hostname + "/home";
-          location.replace(home_link);
+          // const home_link = location.protocol + "//" + location.hostname + "/home";
+          // location.replace(home_link);
           return;
         }
           console.log("0回答");
