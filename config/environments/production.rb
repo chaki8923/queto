@@ -100,7 +100,7 @@ Rails.application.configure do
 
   ActionCable.server.config.disable_request_forgery_protection = true
   config.action_cable.url = "ws://54.248.240.151//cable" 
-  config.action_cable.allowed_request_origins = ['http://54.248.240.151']
+  config.action_cable.allowed_request_origins = ['https://54.248.240.151']
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
