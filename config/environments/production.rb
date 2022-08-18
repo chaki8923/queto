@@ -99,8 +99,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   ActionCable.server.config.disable_request_forgery_protection = true
-  config.action_cable.url = "ws://15.165.143.28//cable" 
-  config.action_cable.allowed_request_origins = ['http://15.165.143.28']
+  config.action_cable.url = "ws://54.248.240.151//cable" 
+  config.action_cable.allowed_request_origins = ['http://54.248.240.151']
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
