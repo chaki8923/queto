@@ -46,8 +46,8 @@ export default {
           location.replace(home_link);
           return;
         } else {
-          const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 0;
-          // const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 0;
+          // const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 0;
+          const link = location.protocol + "//" + location.hostname + "/create_judgement?oji=" + 0;
           this.axios_post(link);
           // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
           const home_link = location.protocol + "//" + location.hostname + "/home";
