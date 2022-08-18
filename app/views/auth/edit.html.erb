@@ -10,11 +10,6 @@
           <span class="alert"><%= message %></span>
         <% end %> 
       </div>
-       <div class="mb-3">
-        <%= f.label :avatar," 画像",class: 'form-label' %>
-        <%= f.file_field :avatar,class: 'form-control' %>
-      </div>
-      <%= f.submit "Edit", class: 'btn btn-primary' %>
     <% end %>
        <a class="btn btn-info" href="/auth/<%=@current_user.id%>/avatar">アイコン登録</a>
   </div>
