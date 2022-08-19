@@ -2,6 +2,8 @@ require 'carrierwave/storage/abstract'
 require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
+puts 'アプリの初期化ーーーーーーーーー2'
+
 CarrierWave.configure do |config|
     config.storage :fog
     config.fog_provider = 'fog/aws'
@@ -13,5 +15,7 @@ CarrierWave.configure do |config|
       region: 'ap-northeast-1',   # アジアパシフィック(東京)を選択した場合
       path_style: true
     }
+
 end
+
 

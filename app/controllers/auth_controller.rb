@@ -1,6 +1,6 @@
 class AuthController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
-  skip_before_action :adult_flg!, only: [:new, :create]
+  skip_before_action :adult_flg!, only: [:new, :create,:avatar]
 
   def new
     @user = User.new
@@ -52,12 +52,10 @@ class AuthController < ApplicationController
   end
   
   
-
-  
   private
 
     def user_params
-      params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg)
+      params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg,:password, :password_confirmation)
     end
 
 

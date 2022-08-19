@@ -62,6 +62,7 @@ export default {
           console.log("登録成功");
           console.log(res);
 
+
           // window.sessionStorage.setItem([プロパティ名],[値])でセッションに保存できる。
           window.sessionStorage.setItem(
             ["flash_message"],
@@ -78,10 +79,12 @@ export default {
       setTimeout(function(){
         location.replace(link);
       },300)
+
     },
     getUser(){
       axios.get("http://localhost:3000/get_user").then((res) => {
           this.userId = res.data.id
+          console.log(this.userId);
           return res;
         })
         .catch(function (err) {
