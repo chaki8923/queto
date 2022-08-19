@@ -8,7 +8,7 @@ class SessionController < ApplicationController
 
   def create
 
-    @user = User.find_by!(name: session_params[:name])
+    @user = User.authenticate(name: session_params[:password])
     if @user.present?
       login(@user)
       redirect_to home_path
@@ -33,6 +33,6 @@ class SessionController < ApplicationController
   end
 
   def session_params
-    params.require(:session).permit(:name,:avatar)
+    params.require(:session).permit(:name,:avatar,:password, :password_confirmation)
   end
 end
