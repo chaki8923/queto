@@ -78,3 +78,5 @@ gem 'erb-formatter'
 gem "foreman", group: :development
 gem 'carrierwave', '~> 2.0'
 gem 'fog-aws'
+gem 'dotenv-rails'
+gem 'aws-sdk', '~> 3'

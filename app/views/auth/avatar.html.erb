@@ -2,8 +2,8 @@
  <div id='avatar'>
 </div>
 <% if @current_user.adult_flg.nil? %> 
- <div class="text-center">
-  <%= link_to (old_judgements_path),class: 'btn btn-primary m-auto',method: :get do %>
+ <div class="text-center mt-5">
+  <%= link_to (old_judgements_path),class: 'btn btn-secondary m-auto',method: :get do %>
     スキップ　<i class="fa-solid fa-forward"></i>
   <%end%>
   </div>

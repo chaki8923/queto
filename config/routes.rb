@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   post   'login',   to: 'session#create'
 
 
+  get '/aws_signed', to: 'auth#upload'
+
   # root to: 'auth#home'  
   resources :auth
   resources :users

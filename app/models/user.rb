@@ -3,8 +3,8 @@ class User < ApplicationRecord
   has_many :rooms, through: :user_rooms
   has_many :words
   has_many :users, through: :room_requests
+  has_secure_password validations: true
   mount_uploader :avatar, AvatarUploader
-
 
   # before_create :create_remember_token
 

@@ -43,7 +43,10 @@ export default {
           this.axios_post(link);
           // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
           const home_link = location.protocol + "//" + location.hostname + "/home";
-          location.replace(home_link);
+          setTimeout(function(){
+            location.replace(home_link);
+          },300);
+         
           return;
         } else {
           // const link = location.protocol + "//" + location.hostname + ":3000/create_judgement?oji=" + 0;
@@ -51,14 +54,16 @@ export default {
           this.axios_post(link);
           // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
           const home_link = location.protocol + "//" + location.hostname + "/home";
-          console.log(home_link);
-          location.replace(home_link);
+          setTimeout(function(){
+            location.replace(home_link);
+          },300);
+
           return;
         }
       }
 
       if (this.count == 1) {
-
+        
         this.oji_answer = this.oji_answer + $oji_count;
 
         console.log("２回答");
@@ -76,10 +81,12 @@ export default {
         this.second_id = this.question.id;
         this.count = 1;
         
-      } else {
+      } else if(this.count == 0) {
         if(this.oji_answer >= 2){
-          const home_link = location.protocol + "//" + location.hostname + "/home";
-          location.replace(home_link);
+          console.log('遷移！');
+          // const home_link = location.protocol + "//" + location.hostname + ":3000/home";
+          // const home_link = location.protocol + "//" + location.hostname + "/home";
+          // location.replace(home_link);
           return;
         }
           console.log("0回答");

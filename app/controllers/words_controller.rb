@@ -13,7 +13,7 @@ class WordsController < ApplicationController
   end
 
   def index
-    @words = @current_user.words.all
+    @words = Word.all
   end
 
   def edit

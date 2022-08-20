@@ -34,6 +34,7 @@ export default {
       console.log('hide');
       this.show_btn = false;
     },
+    
     updateAvatar() {
       //バックエンドに送るフォームを生成
       let formData = new FormData();
@@ -75,7 +76,7 @@ export default {
        const link = location.protocol + "//" + location.hostname + "/old_judgements";
       setTimeout(function(){
         location.replace(link);
-      },300)
+      },400)
     },
     getUser(){
       // axios.get("http://localhost:3000/get_user").then((res) => {
@@ -87,6 +88,7 @@ export default {
       //   });
       axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
           this.userId = res.data.id
+          console.log(this.userId);
           return res;
         })
         .catch(function (err) {
@@ -97,6 +99,7 @@ export default {
   mounted() {
     this.getUser();
     console.log(this.userId);
+    
   },
 };
 </script>
