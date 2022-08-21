@@ -8,8 +8,7 @@ class SessionController < ApplicationController
 
   def create
 
-    @user = User.authenticate(session_params[:password])
-    if @user.present?
+    if @user.authenticate(session_params[:password])
       login(@user)
       redirect_to home_path
     else

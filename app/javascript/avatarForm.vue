@@ -76,6 +76,12 @@ export default {
       }
       //  const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
        const link = location.protocol + "//" + location.hostname + "/old_judgements";
+
+       setTimeout(function(){
+        location.replace(link);
+      },400)
+
+
       
     },
     getUser(){
