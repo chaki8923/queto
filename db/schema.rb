@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_03_013406) do
+ActiveRecord::Schema.define(version: 2022_08_19_012124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2022_08_03_013406) do
     t.string "remember_token"
     t.string "avatar"
     t.boolean "adult_flg"
+    t.string "password_digest"
   end
 
   create_table "words", force: :cascade do |t|

@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   protect_from_forgery
+  skip_before_action :adult_flg!
 
   def create_young_message(message, word)
     new_message = message.convert_young_message.gsub!(word.term, word.conversion)
@@ -35,19 +36,31 @@ class MessagesController < ApplicationController
     @message = Message.create!(content: params['content'], room_id: params['room_id'], user_id: @current_user.id,
       request_flg: params['request_flg'])
       @room = Room.find_by(id: params['room_id'])
-      @room.update!(request_flg: true)
+      @room.update!(request_flg: 1)
       RoomRequest.find_or_create_by(user_id: @current_user.id, room_id: params['room_id'])
-      RoomChannel.broadcast_to(@room, message: @message.template)
+      RoomChannel.broadcast_to(@room, message_old: @message.template,message_young: @message.template_young)
     end
     
-  # 参加リクエストの許可
-  def permission
-    @current_room = Room.find_by(id: params['room_id'])
-    message = Message.where(user_id: params['user_id'], room_id: params['room_id']).where.not(request_flg: nil).first
-    @name = User.find_by(id: params['push_user']).name
-    if Room.find_or_create_by(id: @current_room.id, name: @current_room.name)
-      message.update(convert_old_message: "#{@name}さん承認ありがとう！", convert_young_message: "#{@name}さん承認ありがとう！", request_flg: nil)
-      UserRoom.find_or_create_by(user_id: params['user_id'], room_id: params['room_id'])
+    # 参加リクエストの許可
+    def permission
+      puts 'パラメータ'
+      puts params['push_user']
+      puts '今のid'
+      puts @current_user.id
+      if params['push_user'].to_i == @current_user.id
+        
+        @current_room = Room.find_by(id: params['room_id'])
+        @message = Message.where(user_id: params['user_id'], room_id: params['room_id']).first
+        
+        @name = User.find_by(id: params['push_user']).name
+        if Room.find_or_create_by(id: @current_room.id, name: @current_room.name)
+          @message.update!(convert_old_message: "#{@name}さん承認ありがとう！", convert_young_message: "#{@name}さん承認ありがとう！", request_flg: nil)
+          UserRoom.find_or_create_by(user_id: params['user_id'], room_id: params['room_id'])
+          redirect_to user_room_path(@current_user,@current_room)
+          RoomChannel.broadcast_to(@rooms ,request_id: params['user_id'])
+      end
+    else
+      return
     end
   end
 

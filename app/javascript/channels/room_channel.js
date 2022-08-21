@@ -1,16 +1,11 @@
 import consumer from "./consumer"
 
-
-console.log('room_channel.js読み込み');
-
 window.addEventListener('load',(event) => {
-  console.log('loadイベント読み込み');
+
   const data = document.getElementById("data");
   if (data === null) {
-    console.log('dataなし');
     return
   }
-  
   if(data !== null){
     
     const room_id = data.getAttribute("data-id");
@@ -31,23 +26,21 @@ window.addEventListener('load',(event) => {
   
       received(data) {
         // Called when there's incoming data on the websocket for this channel
-
-          console.log(user_id);
-          console.log(data);
+        //部屋一覧画面居る時にリクエスト許可されれば自動リロード
+          if(data.request_id == user_id){
+            location.reload();
+            return;
+          }
           
           document.getElementById("message_content").value = ''
           const container = document.getElementById("container")
-        
+          
           if(data.message_id == user_id){
               if(adult_flg == 'true'){//自分が発信者でおじさん
                 const h = '<div class="chat-line my" >'  + data['message_young'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
                 
               }else{//自分が発信者で若者
-                console.log('young1');
-                
-                console.log('自分若者');
-                console.log(adult_flg);
                 const h = '<div class="chat-line my" >'  + data['message_old'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
               }
@@ -57,20 +50,14 @@ window.addEventListener('load',(event) => {
                 const h = '<div class="chat-line you" >'  + data['message_young'] + '</div>'
                 container.insertAdjacentHTML('beforeend', h)
               }else{//相手が発信者で若者
-                console.log(adult_flg);
-                console.log('こっちか？');
+
               const h = '<div class="chat-line you" >'  + data['message_old'] + '</div>'
               container.insertAdjacentHTML('beforeend', h)
-              
             }
             
           }
-
           var obj = document.getElementById('container');
           obj.scrollTop = obj.scrollHeight;
-
-        
-       
       }
     })
   }

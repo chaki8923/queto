@@ -1,6 +1,6 @@
 class AuthController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
-  skip_before_action :adult_flg!, only: [:new, :create]
+  skip_before_action :adult_flg!, only: [:new, :create,:avatar,:get_user,:update_avatar]
 
   def new
     @user = User.new
@@ -11,6 +11,12 @@ class AuthController < ApplicationController
     @users = User.email_select(search_email) # sqlは書かずに検索したいemailアドレスの文字を渡すだけ
 
     render('auth/home')
+  end
+  
+  def avatar
+    puts 'avatar!!!!'
+    @user = @current_user
+    render('auth/avatar')
   end
 
   def create
@@ -37,11 +43,13 @@ class AuthController < ApplicationController
   end
 
   def get_user
+    puts 'getuser'
     @user = @current_user
     render json: { id: @user.id }, status: 200
   end
 
   def update_avatar
+    puts 'update---------!!!'
     @user = User.find(params[:id])
     if @user.update(user_params)
       render json: { id: @user.id, avatar: @user.avatar }, status: 200
@@ -49,11 +57,13 @@ class AuthController < ApplicationController
       render json: { message: '失敗しました', error: @user.errors.messages }, status: 400
     end
   end
-
+  
+  
   private
 
-  def user_params
-    params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg)
-  end
+    def user_params
+      params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg,:password, :password_confirmation)
+    end
+
 
 end

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'get_judgement', to: 'old_judgements#get_judgement'
+  post 'create_judgement', to: 'old_judgements#create_judgement'
   #vue側でuser_id取得用
   get 'get_user', to: 'auth#get_user'
   get 'get_message/:user_id/:id', to: 'rooms#get_messages'
@@ -36,12 +38,12 @@ Rails.application.routes.draw do
   post   'login',   to: 'session#create'
 
 
+  get '/aws_signed', to: 'auth#upload'
+
   # root to: 'auth#home'  
   resources :auth
   resources :users
   resources :old_judgements
 
-  get 'get_judgement', to: 'old_judgements#get_judgement'
-  post 'create_judgement', to: 'old_judgements#create_judgement'
 
 end
