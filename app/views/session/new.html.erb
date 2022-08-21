@@ -1,13 +1,16 @@
 
 <div class="p-5 mt-5">
-<%= flash[:danger] %>
+<span class="alert"><%= flash[:danger] %></span>
   <h1>ログイン</h1>
     <%= form_for(:session,url: login_path,html: {class: 'form-group'}) do |f| %>
       <div class="mb-3">
         <%= f.label :name,"ニックネーム",class: 'form-label' %>
         <%= f.text_field :name,class: 'form-control' %>
       </div>
-     
+      <div class="mb-3">
+        <%= f.label :password, "パスワード",class: 'form-label' %>
+        <%= f.password_field :password,class: 'form-control' %>
+      </div>
       
       <%= f.submit "Login", class: 'btn btn-primary' %>
     <% end %>

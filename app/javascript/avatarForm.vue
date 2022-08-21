@@ -6,7 +6,7 @@
       <div class="error">
         <p>{{ error }}</p>
       </div>
-      <button  v-if="show_btn" @click="updateAvatar" class="btn btn-primary">これで登録</button>
+      <span  v-if="show_btn" @click="updateAvatar" class="btn btn-primary">これで登録</span>
     </div>
   </div>
 </template>
@@ -36,6 +36,8 @@ export default {
     },
     
     updateAvatar() {
+      console.log('update');
+      
       //バックエンドに送るフォームを生成
 
       let formData = new FormData();
@@ -76,34 +78,43 @@ export default {
       }
        const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
       //  const link = location.protocol + "//" + location.hostname + "/old_judgements";
+
       setTimeout(function(){
         location.replace(link);
-      },300)
+      },400)
 
     },
     getUser(){
       axios.get("http://localhost:3000/get_user").then((res) => {
           this.userId = res.data.id
+          console.log('idだよ');
           console.log(this.userId);
+          console.log(res.data);
+          
           return res;
         })
         .catch(function (err) {
           console.log(err);
         });
-    //   axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
-    //       this.userId = res.data.id
-    //       return res;
-    //     })
-    //     .catch(function (err) {
-    //       console.log(err);
-    //     });
+      // axios.get(location.protocol + "//" + location.hostname + "/get_user").then((res) => {
+      //     this.userId = res.data.id
+      //     console.log(this.userId);
+      //     return res;
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //   });
+
     }
   },
   mounted() {
-    this.getUser();
     console.log(this.userId);
     
   },
+  created(){
+    
+    this.getUser();
+  }
 };
 </script>
 

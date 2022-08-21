@@ -8,12 +8,11 @@ class SessionController < ApplicationController
 
   def create
 
-    @user = User.authenticate(name: session_params[:password])
-    if @user.present?
+    if @user.authenticate(session_params[:password])
       login(@user)
       redirect_to home_path
     else
-      flash.now[:danger] = t('.flash.invalid_password')
+      flash.now[:danger] = t('errors.messages.login')
       render 'new'
     end
   end
@@ -28,7 +27,7 @@ class SessionController < ApplicationController
   def set_user
     @user = User.find_by!(name: session_params[:name])
   rescue StandardError
-    flash.now[:danger] = t('.flash.invalid_mail')
+    flash.now[:danger] = t('errors.messages.login')
     render action: 'new'
   end
 

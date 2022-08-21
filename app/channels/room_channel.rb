@@ -5,7 +5,10 @@ class RoomChannel < ApplicationCable::Channel
     reject if @user.nil?
     @room = @user.rooms.find_by(id: params[:id])
     puts @room
-    reject if @room.nil?
+    if @room.nil?
+      @rooms = Room.all
+      stream_for(@rooms)
+    end
     puts 'サブスク'
     puts current_user.name
     stream_for(@room)

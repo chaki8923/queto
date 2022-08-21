@@ -10,15 +10,15 @@
         <% end %> 
       </div>
       <div class="mb-3">
-        <%= f.label :password,class: 'form-label' %>
-        <%= f.text_field :password,class: 'form-control' %>
+        <%= f.label :password, "パスワード",class: 'form-label' %>
+        <%= f.password_field :password,class: 'form-control',placeholder: "半角英数5文字以上" %>
         <% @user.errors.full_messages_for(:password).each do |message| %>
           <span class="alert"><%= message %></span>
         <% end %> 
       </div>
       <div class="mb-3">
-        <%= f.label :password_confirmation,class: 'form-label' %>
-        <%= f.text_field :password_confirmation,class: 'form-control' %>
+        <%= f.label :password_confirmation, "再入力",class: 'form-label' %>
+        <%= f.password_field :password_confirmation,class: 'form-control' %>
         <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
           <span class="alert"><%= message %></span>
         <% end %> 

@@ -1,9 +1,9 @@
 ja:
+
   activerecord:
     attributes:
       user:
         name: 名前
-        
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻
@@ -140,6 +140,8 @@ ja:
       expired: の有効期限が切れました。新しくリクエストしてください。
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
+      login: パスワードまたは名前が違います。
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+ 
