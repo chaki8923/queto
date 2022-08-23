@@ -1,0 +1,6 @@
+
+
+class MessageDomainServise
+
+  
+end

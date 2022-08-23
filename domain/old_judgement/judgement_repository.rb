@@ -16,6 +16,7 @@ class JudgementRepository
         )
     end
 
+
     def update(old_judgement)
         @db[:old_judgement].where(judgement_id: old_judgement.judgement_id.value).update(
             title: old_judgement.title.value,

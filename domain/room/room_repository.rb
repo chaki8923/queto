@@ -15,6 +15,11 @@ class RoomRepository
         )
     end
 
+    # クエリ
+    def find_by_all()
+        @db[:rooms].where(deleted_at: nil).order(:created_at)
+    end
+
     def delete(room)
         @db[:rooms].where(room_id: room.room_id.value).delete(
             deleted_at: Sequel::CURRENT_TIMESTAMP
