@@ -1,5 +1,5 @@
 class SessionController < ApplicationController
-  skip_before_action :require_sign_in!, only: [:new, :create]
+  # skip_before_action :require_sign_in!, only: [:new, :create]
   skip_before_action :adult_flg!, only: [:new, :create,:destroy]
   before_action :set_user, only: [:create]
 
@@ -35,4 +35,6 @@ class SessionController < ApplicationController
   def session_params
     params.require(:session).permit(:name,:avatar,:password, :password_confirmation)
   end
+
+  
 end

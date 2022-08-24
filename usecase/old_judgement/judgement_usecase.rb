@@ -1,12 +1,12 @@
-require 'domain/old_judgement/judgement_repository'
-require 'domain/old_judgement/judgement_query_servise'
+require './domain/old_judgement/judgement_repository'
+require './domain/old_judgement/judgement_query_servise'
 
 
 
 class JudgementUsecase
-    def initialize(judgement_repository,judgement_query_servise)
+    def initialize(judgement_repository,judgement_query_service)
         @jr = judgement_repository
-        @jqr = judgement_query_servise
+        @jqr = judgement_query_service
     end
 
     def insert(judgement_id,title,image)

@@ -1,8 +1,8 @@
 require 'sequel'
 require '/domain/message/*.rb'
-require '/usecase/user/user_usecase'
+require '/usecase/user/user_usecace'
 
-class MessageQueryServise
+class MessageQueryService
     def initialize(db,message_repository,user_usecase)
         @mr = message_repository
         @uu = user_usecase

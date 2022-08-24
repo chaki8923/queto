@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
-  before_action :require_sign_in!
+  # before_action :require_sign_in!
   before_action :adult_flg!
   helper_method :signed_in?
 
   protect_from_forgery with: :exception # csrf対策
 
   def current_user
-    remember_token = User.encrypt(cookies[:user_remember_token]) # クッキーのremember_tokenハッシュ化
-    @current_user ||= User.find_by(remember_token: remember_token) # テーブルに存在すればremember_token代入。存在しなければfalse
+    # remember_token = User.encrypt(cookies[:user_remember_token]) # クッキーのremember_tokenハッシュ化
+    # @current_user ||= User.find_by(remember_token: remember_token) # テーブルに存在すればremember_token代入。存在しなければfalse
   end
 
   def login(user)
@@ -22,16 +22,16 @@ class ApplicationController < ActionController::Base
     cookies.delete(:user_remember_token)
   end
 
-  def signed_in?
-    @current_user.present?
-  end
+  # def signed_in?
+  #   @current_user.present?
+  # end
 
 
   private
   
-  def require_sign_in!
-    redirect_to login_path unless signed_in?
-  end
+  # def require_sign_in!
+  #   redirect_to login_path unless signed_in?
+  # end
 
   def adult_flg!
     if @current_user.present?

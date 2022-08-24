@@ -1,11 +1,11 @@
-require '/usecase/room_request/request_query_servise'
-require '/domain/room_request/request_repository'
+require './usecase/room_request/request_query_servise'
+require './domain/room_request/request_repository'
 
 
 class RequestUsecase
 
-    def initialize(request_query_servise,request_repository)
-        @rqs = request_query_servise
+    def initialize(request_query_service,request_repository)
+        @rqs = request_query_service
         @rr = request_repository
     end
 

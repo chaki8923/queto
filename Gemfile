@@ -80,3 +80,4 @@ gem 'carrierwave', '~> 2.0'
 gem 'fog-aws'
 gem 'dotenv-rails'
 gem 'aws-sdk', '~> 3'
+gem "sequel-activerecord_connection", "~> 1.0"

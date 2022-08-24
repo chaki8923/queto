@@ -1,5 +1,5 @@
 
-require 'domain/word/word_repository'
+require './domain/word/word_repository'
 
 class WordUsecase
     def initialize(word_repository)

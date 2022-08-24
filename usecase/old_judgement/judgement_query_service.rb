@@ -1,5 +1,5 @@
 
-class JudgementQueryServise
+class JudgementQueryService
     def initialize(db)
         @db = db
     end

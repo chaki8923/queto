@@ -1,6 +1,6 @@
-require 'sequel'
 
-class UserRepository
+
+class ActorRepository
 
     def initialize(db)
         @db = db
@@ -8,7 +8,7 @@ class UserRepository
 
     def insert(user)
         @db[:users].insert(
-            user_id: user.user_id.value,
+            id: user.user_id.value,
             name: user.user_name.value,
             password: user.password.value,
             avatar: user.avatar.value,
@@ -23,15 +23,20 @@ class UserRepository
     end
 
     def find_by_user_id(user_id)
-        @db[:user].where(id: user_id,deleted_at: nil).first
+        @db[:user].where(d: user_id,deleted_at: nil).first
     end
 
     def update(user)
         @db[:users].where(id: user.user_id.value,deleted_at: nil).update(
             name: user.user_name.value,
             password: user.password.value,
-            avatar: user.avatar.value,
             updated_at: Sequel::CURRENT_TIMESTAMP
+        )
+    end
+
+    def update_avatar(user_id,image)
+        @db[:users].where(id: user_id).update(
+            avatar: iamge
         )
     end
 

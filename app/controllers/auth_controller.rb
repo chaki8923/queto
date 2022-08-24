@@ -1,9 +1,25 @@
-class AuthController < ApplicationController
-  skip_before_action :require_sign_in!, only: [:new, :create]
-  skip_before_action :adult_flg!, only: [:new, :create,:avatar]
+require './usecase/user/user_usecase.rb'
+require './usecase/user/user_query_service.rb'
+require './domain/actor/actor_repository.rb'
+require './domain/actor/actor_domain_service.rb'
+require './domain/actor/actor.rb'
 
+
+
+class AuthController < ApplicationController
+  # skip_before_action :require_sign_in!, only: [:new, :create]
+  # skip_before_action :adult_flg!, only: [:new, :create,:avatar]
+  before_action :userusecase
+
+  user = Actor.new('111','chaki','22222',true,'oji.jpeg')
+  puts 'ユーザーです！！！！！'
+  puts user
+  
   def new
+    user = @uu.get_user(1)
+   
     @user = User.new
+   
   end
 
   def index
@@ -58,5 +74,18 @@ class AuthController < ApplicationController
       params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg,:password, :password_confirmation)
     end
 
+    def userusecase
+      user_repository = ActorRepository.new(DB)
+      user_domain_service = ActorDomainService.new(user_repository)
+      user_query_service = UserQueryService.new(DB)
+      @uu = UserUseCase.new(
+        user_repository,
+        user_domain_service,
+        user_query_service
+    
+    
+      )
+
+    end
 
 end

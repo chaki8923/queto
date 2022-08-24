@@ -1,6 +1,6 @@
 require 'bcrypt'
 
-class AuthQueryServise
+class AuthQueryService
 
     def initialize(db)
         @db = db

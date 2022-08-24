@@ -1,6 +1,6 @@
 
 
-class RequestQueryServise
+class RequestQueryService
     def initialize(db)
         @db = db
     end

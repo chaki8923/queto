@@ -1,10 +1,11 @@
-require './domain/user/user'
+require './domain/actor/actor'
 require 'bcrypt'
 
 class UserUseCase
-    def initialize(user_repository,user_domain_servise)
-        @ur = user_repository
-        @uds = user_domain_servise
+    def initialize(actor_repository,actor_domain_service,user_query_service)
+        @ur = actor_repository
+        @uds = actor_domain_service
+        @uqs = user_query_service
     end
 
     def get_user(user_id)
@@ -23,6 +24,12 @@ class UserUseCase
         @ur.update(user)
 
         [user.nil]
+    end
+
+    def update_avatar(user_id,avatar)
+        return nil,'user is not found' unless @uds.user_valid?(user_id)
+
+        @ur.update_avatar(user_id,avatar)
     end
 
     def get_rooms(user_id)

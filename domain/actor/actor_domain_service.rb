@@ -1,4 +1,4 @@
-class UserDomainServise
+class ActorDomainService
 
     def initialize(user_repository)
         @ur = user_repository
