@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root  'auth#index'
+  root  'auth#top'
 
   get 'words/new'
   get 'words/index'

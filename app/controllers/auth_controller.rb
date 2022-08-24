@@ -1,6 +1,6 @@
 class AuthController < ApplicationController
-  skip_before_action :require_sign_in!, only: [:new, :create,:index]
-  skip_before_action :adult_flg!, only: [:new, :create,:avatar,:get_user,:update_avatar,:index]
+  skip_before_action :require_sign_in!, only: [:new, :create,:top]
+  skip_before_action :adult_flg!, only: [:new, :create,:avatar,:get_user,:update_avatar,:top]
 
   def new
     @user = User.new
@@ -10,6 +10,10 @@ class AuthController < ApplicationController
     search_email = 'wa'
     @users = User.email_select(search_email) # sqlは書かずに検索したいemailアドレスの文字を渡すだけ
 
+    render('auth/home')
+  end
+  
+  def top
     render('layouts/home')
   end
   
