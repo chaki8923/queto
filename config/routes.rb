@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root  'session#new'
+  root  'auth#index'
 
   get 'words/new'
   get 'words/index'

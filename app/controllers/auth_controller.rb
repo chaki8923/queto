@@ -10,7 +10,7 @@ class AuthController < ApplicationController
     search_email = 'wa'
     @users = User.email_select(search_email) # sqlは書かずに検索したいemailアドレスの文字を渡すだけ
 
-    render('auth/home')
+    render('layouts/home')
   end
   
   def avatar

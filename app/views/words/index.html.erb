@@ -1,10 +1,10 @@
-
+<p class="notice-line js-toggle-msg"><%= flash[:notice] %></p>
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">単語</th>
-      <th scope="col">意味</th>
+      <th scope="col">若者表示</th>
+      <th scope="col">おじ表示</th>
       <th scope="col">編集</th>
     </tr>
   </thead>
@@ -14,7 +14,9 @@
       <th scope="row"><%= index + 1 %></th>
       <td><%= word.term %></td>
       <td><%= word.conversion %></td>
+      <% if word.user_id == 1 %>
       <td><%= link_to "Edit", edit_word_path(word),class: 'btn btn-info' %><td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>
