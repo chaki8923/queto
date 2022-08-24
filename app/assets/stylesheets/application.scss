@@ -15,6 +15,9 @@
  */
 @import "mixin";
 
+
+
+
 .field_with_errors {
     color: rgb(222, 94, 94);
 }
@@ -76,3 +79,17 @@
     width: 60px;
     border-radius: 50%;
 }
+.notice-line,.c-flash{
+    text-align: center;
+    background: rgba(54, 169, 240, 0.8);
+    color: #fff;
+    padding: 16px 0;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: .8;
+}
+
+

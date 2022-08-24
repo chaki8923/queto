@@ -1,3 +1,4 @@
+<p class="notice-line"><%= flash[:notice] %></p>
 <h1>Chat Rooms</h1>
 <%=link_to "チャットルーム登録",new_user_room_path(@current_user),class: 'btn btn-danger mb-5' %>
 <table class="table table-sm" id="data"  data-id="0" data-user-id="<%= @current_user.id %>" >

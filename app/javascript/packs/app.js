@@ -6,8 +6,6 @@ $(function () {
     $('.dropdown-menu').toggle();
   });
 
-  console.log('aaaaaaaaa');
-
   $(document).on('click', function (e) {
     if (!$(e.target).closest('.dropdown-toggle').length) {
       $('.dropdown-menu').hide();
@@ -45,15 +43,28 @@ $(function () {
   if(msg !== null){
     // location.reload()
     $('.js-delete-text').html(msg);
-    $('.js-delete-message').slideDown();
+    $('.js-delete-message').show();
   //ほんで3秒後にしまってセッション削除
   //セッションの削除はwindow.sessionStorage.removeItem([プロパティ名])
     setTimeout(()=>{
-      $('.js-delete-message').slideUp();
+      $('.js-delete-message').fadeOut();
       window.sessionStorage.removeItem(['flash_message']);
     },3000)
   }
   $('.message').val('');
+
+
+
+  if($('.js-toggle-msg') && $('.js-toggle-msg').text().length){
+    
+    $('.js-toggle-msg').show()
+    setTimeout(()=>{
+      
+      $('.js-toggle-msg').fadeOut()
+    },3000)
+
+    
+  }
 
   $('.js-reload-btn').on('click',function(){
     $(this).prop("disabled", true);
