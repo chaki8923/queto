@@ -1,6 +1,6 @@
 class AuthController < ApplicationController
-  skip_before_action :require_sign_in!, only: [:new, :create]
-  skip_before_action :adult_flg!, only: [:new, :create,:avatar,:get_user,:update_avatar]
+  skip_before_action :require_sign_in!, only: [:new, :create,:index]
+  skip_before_action :adult_flg!, only: [:new, :create,:avatar,:get_user,:update_avatar,:index]
 
   def new
     @user = User.new

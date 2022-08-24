@@ -19,7 +19,7 @@ class SessionController < ApplicationController
 
   def destroy
     logout
-    redirect_to login_path
+    redirect_to home_path
   end
 
   private
