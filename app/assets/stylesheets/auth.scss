@@ -143,6 +143,9 @@
         overflow: hidden;
         position: relative;
         margin-top: 48px;
+        @include mq(sp) {
+            height: auto;
+        }
        &__image{
         opacity: .1;
         object-fit: contain;

@@ -76,7 +76,7 @@ export default {
         console.log(error);
         this.error = "登録に失敗しました";
       }
-
+      
       //  const link = location.protocol + "//" + location.hostname + ":3000" + "/old_judgements";
        const link = location.protocol + "//" + location.hostname + "/old_judgements";
 
