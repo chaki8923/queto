@@ -1,11 +1,11 @@
 class User < ApplicationRecord
+  
   has_many :user_rooms, dependent: :destroy
   has_many :rooms, through: :user_rooms
   has_many :words
   has_many :users, through: :room_requests
   mount_uploader :avatar, AvatarUploader
   
-  # before_create :create_remember_token
   
   scope :email_select, EmailChakiQuery
   
@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_secure_password validations: true
   validates :password, length: { minimum: 5 },on: :create
   
+
 
 
   private
