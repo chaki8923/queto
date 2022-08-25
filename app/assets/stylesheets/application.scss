@@ -16,7 +16,9 @@
 @import "mixin";
 
 
-
+*{
+    font-family: YuGothic,'Yu Gothic',YuGothic,'Yu Gothic',sans-serif;
+}
 
 .field_with_errors {
     color: rgb(222, 94, 94);

@@ -2,14 +2,18 @@
 <div class="p-5 mt-5">
 <span class="alert"><%= flash[:danger] %></span>
   <h1>ログイン</h1>
-    <%= form_for(:session,url: login_path,html: {class: 'form-group'}) do |f| %>
+    <%= form_for(:session, model: @user,url: login_path,html: {class: 'form-group'}) do |f| %>
       <div class="mb-3">
         <%= f.label :name,"ニックネーム",class: 'form-label' %>
+        <%if @params.nil? %>
         <%= f.text_field :name,class: 'form-control' %>
+        <%else%>
+        <%= f.text_field :name,class: 'form-control',value: @params[:name] %>
+        <%end%>
       </div>
       <div class="mb-3">
         <%= f.label :password, "パスワード",class: 'form-label' %>
-        <%= f.password_field :password,class: 'form-control' %>
+        <%= f.password_field :password,class: 'form-control'autocomplete: 'new-password' %>
       </div>
       
       <%= f.submit "Login", class: 'btn btn-primary' %>

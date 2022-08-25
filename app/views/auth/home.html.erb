@@ -1,22 +1,22 @@
 <p class="notice-line js-toggle-msg"><%= flash[:notice] %></p>
- <div class="home-container">
+ <div class="top-container">
   <% if @current_user.adult_flg == true %>
     <h1 class="text-center">ようこそ、お・じ・さ・ん</h1>
     <div class="image-container mb-5">
        <%= image_tag asset_path('oji_face.jpeg'), class: 'home-image' %>
     </div>
-    <div class="text-center">
-       <%= link_to  (user_rooms_path(@current_user.id)),class: 'btn btn-primary m-auto', method: :get do%>
+    <div class="text-center d-block">
+       <%= link_to  (user_rooms_path(@current_user.id)),class: 'btn btn-primary m-auto p-3', method: :get do%>
        早速トーク開始　<i class="fa-solid fa-comment-dots"></i>
        <% end %>
-   </div>
+    </div>
   <% else %>
     <h1 class="text-center">ようこそ、希望に満ちた若者よ</h1>
     <div class="image-container mb-5">
        <%= image_tag asset_path('baby.jpeg'), class: 'home-image' %>
     </div>
     <div class="text-center">
-       <%= link_to  (user_rooms_path(@current_user.id)),class: 'btn btn-primary m-auto p-5', method: :get do%>
+       <%= link_to  (user_rooms_path(@current_user.id)),class: 'btn btn-primary m-auto p-3', method: :get do%>
        早速トーク開始　<i class="fa-solid fa-comment-dots"></i>
        <% end %>
     </div>

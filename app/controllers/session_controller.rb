@@ -4,6 +4,7 @@ class SessionController < ApplicationController
   before_action :set_user, only: [:create]
 
   def new
+    @user = User.new
   end
 
   def create
@@ -12,21 +13,23 @@ class SessionController < ApplicationController
       login(@user)
       redirect_to home_path
     else
+      @params = session_params
       flash.now[:danger] = t('errors.messages.login')
-      render 'new'
+      render 'new',status: :unprocessable_entity
     end
   end
-
+  
   def destroy
     logout
     redirect_to home_path
   end
-
+  
   private
-
+  
   def set_user
     @user = User.find_by!(name: session_params[:name])
   rescue StandardError
+    @params = session_params
     flash.now[:danger] = t('errors.messages.login')
     render action: 'new'
   end
