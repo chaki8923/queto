@@ -21,11 +21,21 @@ class RoomsController < ApplicationController
 
   end
 
+
   def create
     @room = Room.new(room_params)
     if @room.save
       user_room = UserRoom.create(user_id: params[:user_id], room_id: @room.id)
       redirect_to user_rooms_path(@current_user)
+    end
+  end
+
+  def destroy
+
+    @room = @current_user.rooms.find(params[:id])
+    if @room.present?
+      @room.destroy
+      redirect_to user_rooms_path(@current_user),notice: '削除しました'
     end
   end
 

@@ -1,3 +1,4 @@
+<p class="notice-line js-toggle-msg"><%= flash[:notice] %></p>
 <div class="p-5 mt-5">
   <h1>チャットルーム登録</h1>
     <%= form_with(model: @room,url: user_rooms_path(@current_user.id), html:{class: 'form-group'}) do |f| %>
