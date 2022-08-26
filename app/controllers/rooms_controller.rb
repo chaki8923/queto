@@ -27,7 +27,10 @@ class RoomsController < ApplicationController
     if @room.save
       user_room = UserRoom.create(user_id: params[:user_id], room_id: @room.id)
       redirect_to user_rooms_path(@current_user)
+    else
+      render 'new'
     end
+
   end
 
   def destroy

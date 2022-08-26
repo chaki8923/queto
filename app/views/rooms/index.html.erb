@@ -1,4 +1,4 @@
-<p class="notice-line"><%= flash[:notice] %></p>
+<p class="notice-line js-toggle-msg"><%= flash[:notice] %></p>
 <h1>Chat Rooms</h1>
 <%=link_to "チャットルーム登録",new_user_room_path(@current_user),class: 'btn btn-danger mb-5' %>
 
@@ -19,12 +19,14 @@
       <td scope="row"><%= admin_user(room.admin_user) %></td>
       <td>参加中</td>
        <td> 
+       <%if room.admin_user == @current_user.id %>
             <a class="btn inline btn-danger" href="#inline">削除</a>
             <div id="inline" style="display:none;" class="white-popup-block">
               <h2>削除しますか？</h2>
               <%= link_to "削除", "/users/#{@current_user.id}/rooms/#{room.id}",class: 'btn btn-danger',method: :delete %>
               <span class="inner-close btn btn-secondary">キャンセル</span>
             </div>
+        <% end %>
       </td>
     </tr>
     <% else %>
@@ -45,10 +47,8 @@
             <% end %>
         </td>
         <%# ./form %>
-      <td> <%= form_with(url: '/',local: false, html:{class: 'form-group'})  do |f| %>
-                
-                <%= f.hidden_field :room_id, value: room.id %>
-            <% end %>
+      <td> 
+      
       </td>
     </tr>
     <%end%>
