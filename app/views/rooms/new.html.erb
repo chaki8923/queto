@@ -1,8 +1,9 @@
+<p class="notice-line js-toggle-msg"><%= flash[:notice] %></p>
 <div class="p-5 mt-5">
   <h1>チャットルーム登録</h1>
     <%= form_with(model: @room,url: user_rooms_path(@current_user.id), html:{class: 'form-group'}) do |f| %>
       <div class="mb-3">
-        <%= f.label :namel,class: 'form-label' %>
+        <%= f.label :name,"部屋名",class: 'form-label' %>
         <%= f.text_field :name,class: 'form-control' %>
         <%= f.hidden_field :admin_user, value: @current_user.id %>
         <% @room.errors.full_messages_for(:name).each do |message| %>

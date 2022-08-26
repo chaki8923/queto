@@ -1,12 +1,14 @@
-<p class="notice-line"><%= flash[:notice] %></p>
+<p class="notice-line js-toggle-msg"><%= flash[:notice] %></p>
 <h1>Chat Rooms</h1>
 <%=link_to "チャットルーム登録",new_user_room_path(@current_user),class: 'btn btn-danger mb-5' %>
+
 <table class="table table-sm" id="data"  data-id="0" data-user-id="<%= @current_user.id %>" >
  <thead>
     <tr>
       <th scope="col">部屋名</th>
       <th scope="col">管理者</th>
       <th scope="col">参加状況</th>
+      <th scope="col">削除</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +18,16 @@
       <th scope="row"><%= link_to room.name, user_room_path(@current_user,room) %>  <% if room.request_flg == true %><i class="fa-solid fa-circle-check request-check"></i><% end %></th>
       <td scope="row"><%= admin_user(room.admin_user) %></td>
       <td>参加中</td>
+       <td> 
+       <%if room.admin_user == @current_user.id %>
+            <a class="btn inline btn-danger" href="#inline">削除</a>
+            <div id="inline" style="display:none;" class="white-popup-block">
+              <h2>削除しますか？</h2>
+              <%= link_to "削除", "/users/#{@current_user.id}/rooms/#{room.id}",class: 'btn btn-danger',method: :delete %>
+              <span class="inner-close btn btn-secondary">キャンセル</span>
+            </div>
+        <% end %>
+      </td>
     </tr>
     <% else %>
     <tr>
@@ -23,7 +35,7 @@
       <td><%= room.name %></td>
       <td> <%= form_with(url: '/join_us',local: false, html:{class: 'form-group'})  do |f| %>
                 <% if @request_flg == false %>
-                <button class="ml-3 btn btn-success js-reload-btn">参加リクエスト</button>
+                <button class="ml-3 btn btn-success js-reload-btn">参加する</button>
                 <%else%>
                 <button class="ml-3 btn btn-secondary" disabled >リクエスト中</button>
                 <%end%>
@@ -31,14 +43,19 @@
                 <%= f.hidden_field :room_id, value: room.id %>
                 <%= f.hidden_field :request_flg, value: 1 %>
                 <%= f.hidden_field :room_admin, value: room.admin_user %>
-                <%= f.hidden_field :content, value: '管理者さん。ココ押して承認よろぴく' %></td>
-    </tr>
+                <%= f.hidden_field :content, value: '管理者さん。ココ押して承認よろぴく' %>
             <% end %>
+        </td>
         <%# ./form %>
+      <td> 
+      
+      </td>
+    </tr>
     <%end%>
     <%# ./room %>
 <%end%>
 <%# ./each %>
   </tbody>
 </table>
+
 

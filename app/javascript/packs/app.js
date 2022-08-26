@@ -90,6 +90,11 @@ $(function () {
     }
   });
 
+  $(".inline").modaal();
+  $('.inner-close').on('click',function(){
+    $('.inline').modaal('close');
+  })
+
 })
 
 

@@ -43,10 +43,7 @@ class MessagesController < ApplicationController
     
     # 参加リクエストの許可
     def permission
-      puts 'パラメータ'
-      puts params['push_user']
-      puts '今のid'
-      puts @current_user.id
+
       if params['push_user'].to_i == @current_user.id
         
         @current_room = Room.find_by(id: params['room_id'])

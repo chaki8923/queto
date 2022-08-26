@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :words
 
   resources :users, only: [] do
-    resources :rooms, only: [:new,:index, :show,:create]
+    resources :rooms, only: [:new,:index, :show,:create,:destroy]
   end
 
 

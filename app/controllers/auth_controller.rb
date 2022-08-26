@@ -3,6 +3,9 @@ class AuthController < ApplicationController
   skip_before_action :adult_flg!, only: [:new, :create,:avatar,:get_user,:update_avatar,:top]
 
   def new
+    if @current_user.present?
+      render('auth/home')
+    end
     @user = User.new
   end
 

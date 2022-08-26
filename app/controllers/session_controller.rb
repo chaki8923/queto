@@ -4,6 +4,9 @@ class SessionController < ApplicationController
   before_action :set_user, only: [:create]
 
   def new
+    if @current_user.present?
+      render('auth/home')
+    end
     @user = User.new
   end
 
