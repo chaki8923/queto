@@ -39,7 +39,7 @@ class MessagesController < ApplicationController
       @room.update!(request_flg: 1)
       RoomRequest.find_or_create_by(user_id: @current_user.id, room_id: params['room_id'])
       RoomChannel.broadcast_to(@room, message_old: @message.template,message_young: @message.template_young)
-    end
+  end
     
     # 参加リクエストの許可
     def permission
