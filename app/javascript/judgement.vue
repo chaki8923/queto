@@ -101,7 +101,8 @@ export default {
         this.axios_get(link);
       }
           
-      
+
+          
     },
     yes() {
       this.getJudge(1);
