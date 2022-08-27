@@ -13,7 +13,7 @@ class WordsController < ApplicationController
   end
 
   def index
-    @words = Word.all
+    @words = Word.all.page(params[:page]).per(15)
   end
 
   def edit
