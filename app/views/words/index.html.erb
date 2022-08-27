@@ -15,7 +15,7 @@
       <td><%= word.term %></td>
       <td><%= word.conversion %></td>
       <td>
-      <% if word.user_id == 1 %>
+      <% if word.user_id == @current_user.id %>
       <%= link_to "編集", edit_word_path(word),class: 'btn btn-info' %>
       <% end %>
       <td>

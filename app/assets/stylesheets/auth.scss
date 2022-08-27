@@ -138,7 +138,7 @@
     }
     &-container{
         margin: auto;
-        height: 600px;
+        height: auto;
         padding: 15px;
         overflow: hidden;
         position: relative;
@@ -163,6 +163,9 @@
         padding: 10px;
         
        }
+    }
+    &-gif{
+        width: 100%;
     }
 }
 ol.sample1{
@@ -213,4 +216,25 @@ ol.sample1{
     -o-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+  }
+
+  .gif-wrapper{
+    display: flex;
+    justify-content: space-around;
+  }
+  .gif-young{
+    padding: 10px 16px;
+    color: #fff;
+    background: rgb(81, 137, 233);
+    @include mq(sp) {
+        padding: 6px;
+    }
+}
+.gif-oji{
+    padding: 10px 16px;
+    color: #fff;
+    background: rgb(9, 165, 14);
+    @include mq(sp) {
+        padding: 6px;
+    }
   }

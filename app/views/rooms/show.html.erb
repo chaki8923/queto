@@ -1,8 +1,8 @@
 
-<h2 class="text-center mt-5"><%= @room.name %></h2>
+<h2 class="text-center mt-3"><%= @room.name %></h2>
 
 
-<div id="container" class="chat-window">
+<div id="container" class="chat-window mt-3">
 <% @messages.map do |message| %>
   <div class="chat-line <% if message.user_id == @current_user.id %> my <%  else %> you <% end %>" >
       <%if message.user.avatar.blank? %>

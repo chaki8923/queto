@@ -12,6 +12,9 @@ class RoomsController < ApplicationController
 
   def show
     @room = @current_user.rooms.find(params[:id])
+    if @room.nil?
+      redirect_to user_rooms_path,notice: '管理者が部屋を削除しました。'
+    end
     @room.update!(request_flg: false)
     @messages = @room.messages.all.order(created_at: 'ASC')
     # @messages = @messages.room_requests.all
