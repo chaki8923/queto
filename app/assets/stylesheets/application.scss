@@ -15,9 +15,8 @@
  */
 @import "mixin";
 
-
-*{
-    font-family: YuGothic,'Yu Gothic',YuGothic,'Yu Gothic',sans-serif;
+* {
+    font-family: YuGothic, "Yu Gothic", YuGothic, "Yu Gothic", sans-serif;
 }
 
 .field_with_errors {
@@ -59,29 +58,29 @@
         @include mq(md) {
             width: 50px;
             float: none;
-            display: block!important;
+            display: block !important;
         }
         @include mq(sp) {
             width: 50px;
             float: none;
-            display: block!important;
+            display: block !important;
         }
     }
 }
 
-.default-icon{
+.default-icon {
     width: 100%;
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid #ddd;
-
 }
 
-.icon-wrapper{
+.icon-wrapper {
     width: 60px;
     border-radius: 50%;
 }
-.notice-line,.c-flash{
+.notice-line,
+.c-flash {
     text-align: center;
     background: rgba(54, 169, 240, 0.8);
     color: #fff;
@@ -91,7 +90,29 @@
     left: 0;
     top: 0;
     width: 100%;
-    opacity: .8;
+    opacity: 0.8;
 }
 
-
+.pagination {
+    margin: 20px 0;
+    li {
+        display: inline;
+        font-family: YuGothic, "Yu Gothic", YuGothic, "Yu Gothic", sans-serif;
+        a {
+            padding: 8px 12px;
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #337ab7;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        &.active {
+            background-color: rgb(54, 169, 240);
+            color: #fff;
+        }
+    }
+}
