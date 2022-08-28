@@ -11,12 +11,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(remember_token: remember_token) # テーブルに存在すればremember_token代入。存在しなければfalse
   end
 
-  def login(user)
-    remember_token = User.new_remember_token                  # remember_token作成
-    cookies.permanent[:user_remember_token] = remember_token  # クッキーに入れて
-    cookies.encrypted[:user_id] = user.id
-    user.update!(remember_token: User.encrypt(remember_token)) # userテーブルのremember/tokenを更新
-  end
 
   def logout
     cookies.delete(:user_remember_token)

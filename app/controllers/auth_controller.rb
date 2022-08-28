@@ -1,6 +1,14 @@
+require './domains/command_service/user_command_service.rb'
+require './domains/domain_object/user_domain.rb'
+require './domains/aggregate/user_aggregate.rb'
+require './infras/write_repository/user_write_repository.rb'
+
 class AuthController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create,:top]
   skip_before_action :adult_flg!, only: [:new, :create,:avatar,:get_user,:update_avatar,:top]
+
+  before_action :dependency_injection
+
 
   def new
     if @current_user.present?
@@ -10,8 +18,6 @@ class AuthController < ApplicationController
   end
 
   def index
-    search_email = 'wa'
-    @users = User.email_select(search_email) # sqlは書かずに検索したいemailアドレスの文字を渡すだけ
 
     render('auth/home')
   end
@@ -27,32 +33,31 @@ class AuthController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    
-    if @user.save
-      login(@user)
+    @user = @ucs.new(user_params)
+    if  @ucs.user_create(@user)
+      @ucs.token_update(@user,cookies)
       redirect_to "/auth/#{@user.id}/avatar"
     else
       render 'new', status: :unprocessable_entity # これないとバリデーション出ない
     end
   end
-
+  
   def edit
     @user = User.find(params[:id])
   end
-
+  
   def update
     
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @ucs.update(@user)
       redirect_to home_path, notice: '編集されました'
     else
       render 'edit', status: :unprocessable_entity # これないとバリデーション出ない
     end
   end
 
+  # api
   def get_user
-    puts 'getuser'
     @user = @current_user
     render json: { id: @user.id }, status: 200
   end
@@ -72,6 +77,14 @@ class AuthController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name,  :remember_token, :avatar, :adult_flg,:password, :password_confirmation)
+    end
+
+    def dependency_injection
+      ud = UserDomain.new
+      ua = UserAggregate.new
+      uwr = UserWriteRepository.new
+      @ucs = UserCommandService.new(ud,ua,uwr)
+
     end
 
 

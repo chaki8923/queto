@@ -1,7 +1,9 @@
 class SessionController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create]
   skip_before_action :adult_flg!, only: [:new, :create,:destroy]
-  before_action :set_user, only: [:create]
+  before_action :set_user,:dependency_injection, only: [:create]
+  require './domains/command_service/user_command_service.rb'
+  require './domains/domain_object/user_domain.rb'
 
   def new
     if @current_user.present?
@@ -11,9 +13,9 @@ class SessionController < ApplicationController
   end
 
   def create
-
+    
     if @user.authenticate(session_params[:password])
-      login(@user)
+      @ucs.token_update(@user,cookies)
       redirect_to home_path
     else
       @params = session_params
@@ -40,4 +42,14 @@ class SessionController < ApplicationController
   def session_params
     params.require(:session).permit(:name,:avatar,:password, :password_confirmation)
   end
+
+
+  def dependency_injection
+    ud = UserDomain.new
+    ua = UserAggregate.new
+    uwr = UserWriteRepository.new
+    @ucs = UserCommandService.new(ud,ua,uwr)
+
+  end
+
 end
