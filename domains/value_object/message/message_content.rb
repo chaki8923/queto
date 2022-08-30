@@ -1,8 +1,7 @@
 
 
 
-class RoomAdminUser
-
+class MessageContent
     attr_reader :value
 
     def initialize(value)
@@ -10,9 +9,7 @@ class RoomAdminUser
     end
 
     def self.new(value)
-        puts 'admin_user'
-        return nil,'admin_user is must be a numerical value' unless value.is_a?(Numeric)
-
+        return nil,'message content is must be a string' unless value.is_a?(String)
         super(value)
     end
 end

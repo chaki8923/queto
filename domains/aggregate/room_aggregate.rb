@@ -13,7 +13,8 @@ class RoomAggregate
     end
 
     def room_request(value)
-        room_request = RoomRequestFlg.new(value)
+        room_request,err = RoomRequestFlg.new(value)
+        puts err
         if err.nil?
             room_request
         else
@@ -22,7 +23,9 @@ class RoomAggregate
     end
 
     def admin_user(value)
-        room_admin = RoomAdminUser.new(value)
+
+        room_admin,err = RoomAdminUser.new(value)
+        puts err
         if err.nil?
             room_admin
         else

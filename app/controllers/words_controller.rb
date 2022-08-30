@@ -1,4 +1,7 @@
 class WordsController < ApplicationController
+  
+
+  
   def new
     @word = Word.new
   end
@@ -34,4 +37,6 @@ class WordsController < ApplicationController
   def word_params
     params.require(:word).permit(:term, :conversion, :user_id)
   end
+
+  
 end

@@ -8,7 +8,8 @@ class RoomRequestFlg
     end
 
     def self.new(value)
-        return nil,'requset_flg is must be boolean' unless value.is_a?(TrueClass) || value.is_a?(FalseClass)
+        puts 'request_flg!!!'
+        return nil,'requset_flg is must be boolean' unless value.is_a?(TrueClass) || value.is_a?(FalseClass) || value.to_i.zero?
         super(value)
     end
 end

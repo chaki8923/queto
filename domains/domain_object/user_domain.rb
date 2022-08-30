@@ -6,7 +6,7 @@ require './domains/value_object/user/password.rb'
 
 
 class UserDomain
-    
+
     def create_instance(err,args,params)
         if err.nil?
             {name: args[:name].value,password: args[:password].value,password_confirmation: args[:password_confirmation]}

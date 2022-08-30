@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   post   '/signup',   to: 'auth#create'
   get    '/auth/:id/avatar',     to: 'auth#avatar'
   post   '/auth/:id/avatar',     to: 'auth#update_avatar'
+  # post  '/auth/:id/edit',   to: 'auth#update'
   patch  '/auth/:id/edit',   to: 'auth#update'
   get    '/home',     to: 'auth#index'
 

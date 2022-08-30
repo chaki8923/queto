@@ -2,6 +2,7 @@ require './domains/command_service/user_command_service.rb'
 require './domains/domain_object/user_domain.rb'
 require './domains/aggregate/user_aggregate.rb'
 require './infras/write_repository/user_write_repository.rb'
+require './infras/read_repository/user_read_repository.rb'
 
 class AuthController < ApplicationController
   skip_before_action :require_sign_in!, only: [:new, :create,:top]
@@ -32,7 +33,7 @@ class AuthController < ApplicationController
   def create
     @user = @ucs.new(user_params)
     if  @ucs.user_create(@user)
-      @ucs.token_update(@user,cookies)
+      @ucs.token_update(user_params,cookies)
       redirect_to "/auth/#{@user.id}/avatar"
     else
       render 'new', status: :unprocessable_entity # これないとバリデーション出ない
@@ -44,9 +45,8 @@ class AuthController < ApplicationController
   end
   
   def update
-    
-    @user = User.find(params[:id])
-    if @ucs.update(@user)
+    @user = @ucs.find(params[:id])
+    if @ucs.update(@user,user_params)
       redirect_to home_path, notice: '編集されました'
     else
       render 'edit', status: :unprocessable_entity # これないとバリデーション出ない
@@ -60,7 +60,6 @@ class AuthController < ApplicationController
   end
 
   def update_avatar
-    puts 'update---------!!!'
     @user = User.find(params[:id])
     if @user.update(user_params)
       render json: { id: @user.id, avatar: @user.avatar }, status: 200
@@ -80,7 +79,8 @@ class AuthController < ApplicationController
       ud = UserDomain.new
       ua = UserAggregate.new
       uwr = UserWriteRepository.new
-      @ucs = UserCommandService.new(ud,ua,uwr)
+      urr = UserReadRepoistory.new
+      @ucs = UserCommandService.new(ud,ua,uwr,urr)
 
     end
 

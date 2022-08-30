@@ -1,19 +1,11 @@
+require './domains/write_repositable/room_write_repositable.rb'
 
+class RoomWriteRepository < RoomWriteRepositable
 
-class RoomWriteRepository
-    def initialize(room_aggregate)
-        @room_aggregate = room_aggregate
-    end
-
-    def save
-        room = Room.new
-        room.name = room_aggregate.name(value)
-        room.request_flg = room_aggregate.request_flg(value)
-        room.admin_user = room_aggregate.admin_user(value)
-
+    def save(room)
         room.save
     end
 
-    def update
-    end
+    # def update
+    # end
 end

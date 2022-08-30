@@ -1,14 +1,16 @@
 
 
-
 class UserWriteRepositable
     
 
-    def save
+    def save(user)
         
     end
 
-    def update
+    def update(user)
 
+    end
+
+    def token_update()
     end
 end
