@@ -1,31 +1,43 @@
+require './domains/command_service/user_command_service.rb'
+require './domains/domain_object/user_domain.rb'
+require './domains/aggregate/user_aggregate.rb'
+require './infras/write_repository/user_write_repository.rb'
+require './infras/read_repository/user_read_repository.rb'
+
+require './domains/command_service/room_command_service.rb'
+require './domains/domain_object/room_domain.rb'
+require './domains/aggregate/room_aggregate.rb'
+require './infras/write_repository/room_write_repository.rb'
+require './infras/read_repository/room_read_repository.rb'
+
+require './domains/command_service/message_command_service.rb'
+require './domains/domain_object/message_domain.rb'
+require './domains/aggregate/message_aggregate.rb'
+require './infras/read_repository/message_read_repository.rb'
+require './infras/write_repository/message_write_repository.rb'
+
+require './domains/command_service/word_command_service.rb'
+require './domains/domain_object/word_domain.rb'
+require './domains/aggregate/word_aggregate.rb'
+require './infras/read_repository/word_read_repository.rb'
+require './infras/write_repository/word_write_repository.rb'
+
+
+
+
 class MessagesController < ApplicationController
   protect_from_forgery
   skip_before_action :adult_flg!
+  before_action :dependency_injection,:dependency_injection_room,:dependency_injection_message,:dependency_injection_word
 
-  def create_young_message(message, word)
-    new_message = message.convert_young_message.gsub!(word.term, word.conversion)
-    message.update!(convert_young_message: new_message)
-  end
-
-  def create_old_message(message, word)
-    new_message = message.convert_old_message.gsub!(word.conversion, word.term)
-    message.update!(convert_old_message: new_message)
-  end
-
+  
   def create
-    @message = Message.create!(message_params)
-    @message.update!(convert_old_message: message_params['content'], convert_young_message: message_params['content'])
-    @room = Room.find_by(id: message_params[:room_id])
-    @words = Word.all
 
-     
-    @words.map do |word|
-      if @message.content.include?(word.term) && @current_user.adult_flg == false # 若者が発した言葉のみ変換。おじさんの背伸びは変換しないであげる
-        create_young_message(@message, word)
-      elsif @message.content.include?(word.conversion) && @current_user.adult_flg == true  # おじさんが発信したら若者言葉に変換。若者の優しさは変換しない
-        create_old_message(@message, word)
-      end
-    end
+    @words = @wcs.get_all
+    @message = @mcs.create(message_params)
+    @mcs.update(@message)
+    @room = @rcs.find(@current_user,message_params[:room_id])
+    @mcs.map_to_update(@words,@message,@current_user)
 
     # js側にデータ渡してる
     RoomChannel.broadcast_to(@room, message_id: @message.user_id, user: @user, message_old: @message.template,message_young: @message.template_young)
@@ -43,10 +55,7 @@ class MessagesController < ApplicationController
     
     # 参加リクエストの許可
     def permission
-      puts 'パラメータ'
-      puts params['push_user']
-      puts '今のid'
-      puts @current_user.id
+
       if params['push_user'].to_i == @current_user.id
         
         @current_room = Room.find_by(id: params['room_id'])
@@ -68,5 +77,42 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content, :room_id, :user_id, :request_flg, :push_user, :convert_message)
+  end
+
+
+  def dependency_injection
+    ud = UserDomain.new
+    ua = UserAggregate.new
+    uwr = UserWriteRepository.new
+    urr = UserReadRepoistory.new
+    @ucs = UserCommandService.new(ud,ua,uwr,urr)
+
+  end
+
+ 
+  def dependency_injection_room
+    rd = RoomDomain.new
+    ra = RoomAggregate.new
+    rwr = RoomWriteRepository.new
+    rrr = RoomReadRepository.new
+    @rcs = RoomCommandService.new(rd,ra,rwr,rrr)
+
+  end
+
+  def dependency_injection_message
+    md = MessageDomain.new
+    ma = MessageAggregate.new
+    mwr = MessageWriteRepository.new
+    mrr = MessageReadRepository.new
+    @mcs = MessageCommandService.new(md,ma,mwr,mrr)
+
+  end
+  def dependency_injection_word
+    wd = MessageDomain.new
+    wa = WordAggregate.new
+    wwr = WordWriteRepository.new
+    wrr = WordReadRepository.new
+    @wcs = WordCommandService.new(wd,wa,wwr,wrr)
+
   end
 end

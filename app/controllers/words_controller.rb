@@ -1,5 +1,26 @@
+require './domains/command_service/user_command_service.rb'
+require './domains/domain_object/user_domain.rb'
+require './domains/aggregate/user_aggregate.rb'
+require './infras/write_repository/user_write_repository.rb'
+require './infras/read_repository/user_read_repository.rb'
+
+require './domains/command_service/room_command_service.rb'
+require './domains/domain_object/room_domain.rb'
+require './domains/aggregate/room_aggregate.rb'
+require './infras/write_repository/room_write_repository.rb'
+require './infras/read_repository/room_read_repository.rb'
+
+require './domains/command_service/message_command_service.rb'
+require './domains/domain_object/message_domain.rb'
+require './domains/aggregate/message_aggregate.rb'
+require './infras/read_repository/message_read_repository.rb'
+require './infras/write_repository/message_write_repository.rb'
+
+
+
 class WordsController < ApplicationController
   
+  before_action :dependency_injection,:dependency_injection_room,:dependency_injection_message
 
   
   def new

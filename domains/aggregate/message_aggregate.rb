@@ -1,33 +1,40 @@
-Dir['./domain/value_object/message/*.rb'].sort.each { |file| require file }
+
+require './domains/value_object/message/message_content.rb'
+require './domains/value_object/message/user_id.rb'
+require './domains/value_object/message/room_id.rb'
 
 
 class MessageAggregate
-
+    
     def content(value)
-        name,err = MessageContent.new(value)
+        puts 'aggregate!!!!!'
+        content,err = MessageContent.new(value)
         if err.nil?
-            name
+            content
         else
             value
         end
     end
+    
+    def user_id(value)
+        puts 'aggregate!!!!!'
 
+        user_id,err = UserId.new(value)
+        puts value
+        puts user_id
+        if err.nil?
+            puts user_id.value
+            user_id
+        else
+            value
+        end
+    end
+    
     def room_id(value)
+        puts 'aggregate!!!!!'
         room_id,err = RoomId.new(value)
-        puts err
         if err.nil?
             room_id
-        else
-            value
-        end
-    end
-
-    def user_id(value)
-
-        user_id,err = UserIdr.new(value)
-        puts err
-        if err.nil?
-            user_id
         else
             value
         end

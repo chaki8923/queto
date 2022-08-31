@@ -10,7 +10,7 @@ class RoomAdminUser
     end
 
     def self.new(value)
-        puts 'admin_user'
+
         return nil,'admin_user is must be a numerical value' unless value.is_a?(Numeric)
 
         super(value)

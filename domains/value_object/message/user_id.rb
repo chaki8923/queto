@@ -2,6 +2,8 @@
 
 
 class UserId
+    attr_reader :value
+
     def initialize(value)
         @value = value
     end
