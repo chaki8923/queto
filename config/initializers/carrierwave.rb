@@ -2,7 +2,6 @@ require 'carrierwave/storage/abstract'
 require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
-puts 'アプリの初期化ーーーーーーーーー2'
 
 CarrierWave.configure do |config|
     config.storage :fog
