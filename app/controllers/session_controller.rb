@@ -4,6 +4,7 @@ class SessionController < ApplicationController
   before_action :set_user,:dependency_injection, only: [:create]
   require './domains/command_service/user_command_service.rb'
   require './domains/domain_object/user_domain.rb'
+  require './infras/read_repository/user_read_repository.rb'
 
   def new
     if @current_user.present?
@@ -13,7 +14,8 @@ class SessionController < ApplicationController
   end
 
   def create
-    
+    puts 'パラメータ'
+    puts session_params
     if @user.authenticate(session_params[:password])
       @ucs.token_update(@user,cookies)
       redirect_to home_path
@@ -48,7 +50,8 @@ class SessionController < ApplicationController
     ud = UserDomain.new
     ua = UserAggregate.new
     uwr = UserWriteRepository.new
-    @ucs = UserCommandService.new(ud,ua,uwr)
+    urr = UserReadRepoistory.new
+    @ucs = UserCommandService.new(ud,ua,urr,uwr)
 
   end
 

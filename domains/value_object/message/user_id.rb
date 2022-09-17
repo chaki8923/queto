@@ -1,8 +1,7 @@
 
 
 
-class RoomAdminUser
-
+class UserId
     attr_reader :value
 
     def initialize(value)
@@ -10,9 +9,9 @@ class RoomAdminUser
     end
 
     def self.new(value)
-
-        return nil,'admin_user is must be a numerical value' unless value.is_a?(Numeric)
+        return nil,'user_id is muust be a numeric' unless value.is_a?(Numeric)
 
         super(value)
     end
+
 end

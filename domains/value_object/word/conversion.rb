@@ -1,8 +1,6 @@
 
 
-
-class RoomAdminUser
-
+class Conversion
     attr_reader :value
 
     def initialize(value)
@@ -11,7 +9,7 @@ class RoomAdminUser
 
     def self.new(value)
 
-        return nil,'admin_user is must be a numerical value' unless value.is_a?(Numeric)
+        return nil,'conversion is must be a string' unless value.is_a?(String)
 
         super(value)
     end

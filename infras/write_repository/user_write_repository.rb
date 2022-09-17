@@ -2,14 +2,14 @@
 require './domains/domain_object/user_domain.rb'
 require './domains/write_repositable/user_write_repositable.rb'
 
-class UserWriteRepository
+class UserWriteRepository < UserWriteRepositable
 
     def save(user)
         user.save
     end
 
-    def update(user)
-        user.update
+    def update(user,params)
+        user.update(params)
     end
 
     def token_update(user,cookies)

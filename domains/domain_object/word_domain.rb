@@ -1,0 +1,5 @@
+
+
+class WordDomain
+    
+end

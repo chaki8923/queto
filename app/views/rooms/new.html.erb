@@ -6,6 +6,7 @@
         <%= f.label :name,"部屋名",class: 'form-label' %>
         <%= f.text_field :name,class: 'form-control' %>
         <%= f.hidden_field :admin_user, value: @current_user.id %>
+        <%= f.hidden_field :request_flg, value: 0 %>
         <% @room.errors.full_messages_for(:name).each do |message| %>
           <span class="alert"><%= message %></span>
         <% end %> 
