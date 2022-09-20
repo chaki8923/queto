@@ -7,6 +7,9 @@ set :branch, ENV['BRANCH'] || "main"
 
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
+
+
+
 # SSH接続設定
 set :ssh_options, {
     auth_methods: ['publickey'], 
