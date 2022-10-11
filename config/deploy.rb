@@ -3,22 +3,26 @@ lock "~> 3.17.0"
 
 set :application, "queto"
 set :repo_url, "git@github.com:chaki8923/queto.git"
-set :branch, ENV['BRANCH'] || "main"
+set :branch, ENV["BRANCH"] || "main"
 
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
+append :linked_dirs,
+       "log",
+       "tmp/pids",
+       "tmp/cache",
+       "tmp/sockets",
+       "vendor/bundle",
+       "public/system",
+       "public/uploads"
 
 # SSH接続設定
-set :ssh_options, {
-    auth_methods: ['publickey'], 
-    keys: ['~/.ssh/ryou-pem.cer'] 
-  }
+set :ssh_options, { auth_methods: ["publickey"], keys: ["~/.ssh/ryou-pem.cer"] }
 
-  # 保存しておく世代の設定
+# 保存しておく世代の設定
 set :keep_releases, 5
 
 # rbenvの設定
 set :rbenv_type, :user
-set :rbenv_ruby, '2.7.6'
+set :rbenv_ruby, "2.7.6"
 
 # ここからUnicornの設定
 # Unicornのプロセスの指定
@@ -28,10 +32,10 @@ set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 
 # Unicornを再起動するための記述
-after 'deploy:publishing', 'deploy:restart'
+after "deploy:publishing", "deploy:restart"
 namespace :deploy do
   task :restart do
-    invoke 'unicorn:restart'
+    invoke "unicorn:restart"
   end
 end
 # Default branch is :master

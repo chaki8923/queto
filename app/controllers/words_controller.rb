@@ -6,9 +6,9 @@ class WordsController < ApplicationController
   def create
     @word = Word.new(word_params)
     if @word.save
-      redirect_to words_index_path, notice: '用語が登録されました'
+      redirect_to words_index_path, notice: "用語が登録されました"
     else
-      render 'new', status: :unprocessable_entity
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -23,9 +23,9 @@ class WordsController < ApplicationController
   def update
     @word = Word.find(params[:id])
     if @word.update(word_params)
-      redirect_to words_index_path, notice: '編集されました'
+      redirect_to words_index_path, notice: "編集されました"
     else
-      render 'edit', status: :unprocessable_entity # これないとバリデーション出ない
+      render "edit", status: :unprocessable_entity # これないとバリデーション出ない
     end
   end
 

@@ -12,18 +12,14 @@ class RoomsController < ApplicationController
 
   def show
     @room = @current_user.rooms.find(params[:id])
-    if @room.nil?
-      redirect_to user_rooms_path,notice: '管理者が部屋を削除しました。'
-    end
+    redirect_to user_rooms_path, notice: "管理者が部屋を削除しました。" if @room.nil?
     @room.update!(request_flg: false)
-    @messages = @room.messages.all.order(created_at: 'ASC')
+    @messages = @room.messages.all.order(created_at: "ASC")
     # @messages = @messages.room_requests.all
     @message = @room.messages.build
     @user = User.find_by(id: params[:user_id])
     @current_user_adult = @user.adult_flg
-
   end
-
 
   def create
     @room = Room.new(room_params)
@@ -31,17 +27,15 @@ class RoomsController < ApplicationController
       user_room = UserRoom.create(user_id: params[:user_id], room_id: @room.id)
       redirect_to user_rooms_path(@current_user)
     else
-      render 'new'
+      render "new"
     end
-
   end
 
   def destroy
-
     @room = @current_user.rooms.find(params[:id])
     if @room.present?
       @room.destroy
-      redirect_to user_rooms_path(@current_user),notice: '削除しました'
+      redirect_to user_rooms_path(@current_user), notice: "削除しました"
     end
   end
 

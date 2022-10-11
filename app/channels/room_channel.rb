@@ -9,7 +9,7 @@ class RoomChannel < ApplicationCable::Channel
       @rooms = Room.all
       stream_for(@rooms)
     end
-    puts 'サブスク'
+    puts "サブスク"
     puts current_user.name
     stream_for(@room)
   end

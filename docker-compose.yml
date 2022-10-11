@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
     ports:
-      - 5434:5432
+      - 5435:5432
   web:
     build:
       context: .
@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     ports:
-      - "3000:3000"
+      - "3002:3000"
     volumes:
       - .:/myapp
       - ./.ssh/:/myapp/.ssh
